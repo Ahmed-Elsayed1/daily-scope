@@ -1,0 +1,36 @@
+name: apex_nile_app
+publish_to: "none"
+description: Apex Nile Flutter shell application.
+version: 0.1.0+1
+
+# resolution: workspace
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_bloc: ^8.1.4
+  freezed_annotation: ^2.4.1
+  connectivity_plus: ^6.0.3
+  http: ^1.2.1
+  path: ^1.9.0
+  path_provider: ^2.1.2
+  sqflite: ^2.3.3
+  auth_module:
+    path: ../../packages/auth_module
+  news_module:
+    path: ../../packages/news_module
+  weather_module:
+    path: ../../packages/weather_module
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.9
+  freezed: ^2.5.2
+
+flutter:
+  uses-material-design: true
