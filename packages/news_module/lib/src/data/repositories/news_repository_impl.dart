@@ -4,7 +4,9 @@ import '../datasources/news_api_service.dart';
 import '../datasources/news_cache_data_source.dart';
 import '../models/news_article_model.dart';
 
+/// Implementation of [NewsRepository] using NewsAPI and SQLite cache.
 class NewsRepositoryImpl implements NewsRepository {
+  /// Creates a news repository implementation
   NewsRepositoryImpl({
     required this.apiService,
     required this.cacheDataSource,
@@ -25,6 +27,27 @@ class NewsRepositoryImpl implements NewsRepository {
   @override
   Future<List<NewsArticle>> fetchHeadlines({required int page}) async {
     final models = await apiService.fetchHeadlines(page: page);
+    await cacheDataSource.cacheArticles(models);
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<NewsArticle>> searchArticles({
+    required String query,
+    required int page,
+  }) async {
+    final models = await apiService.searchArticles(query: query, page: page);
+    // Optionally cache search results too
+    await cacheDataSource.cacheArticles(models);
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<NewsArticle>> fetchByCategory({
+    required String category,
+    required int page,
+  }) async {
+    final models = await apiService.fetchByCategory(category: category, page: page);
     await cacheDataSource.cacheArticles(models);
     return models.map((model) => model.toEntity()).toList();
   }

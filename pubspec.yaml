@@ -1,6 +1,18 @@
-name: melos_workspace
+name: apex_nile_workspace
+description: Apex Nile Flutter monorepo workspace
+publish_to: "none"
+
 environment:
   sdk: ">=3.5.0 <4.0.0"
+
+# Dart workspace configuration
+workspace:
+  - apps/apex_nile_app
+  - packages/auth_module
+  - packages/news_module
+  - packages/weather_module
+
+resolution: workspace
 
 dev_dependencies:
   melos: ^4.1.0

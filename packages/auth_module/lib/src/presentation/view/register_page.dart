@@ -4,44 +4,39 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/auth_text_field.dart';
-import 'register_page.dart';
 
-/// Login page for user authentication.
+/// Registration page for creating a new user account.
 /// 
-/// Allows users to sign in with email and password.
-/// Provides navigation to registration for new users.
-class LoginPage extends StatefulWidget {
-  /// Creates a login page
-  const LoginPage({super.key});
+/// Allows users to register with email and password.
+/// On successful registration, automatically logs in the user.
+class RegisterPage extends StatefulWidget {
+  /// Creates a registration page
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  void _handleLogin() {
+  void _handleRegister() {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text.trim();
       final password = _passwordController.text;
-      context.read<AuthCubit>().login(email, password);
+      context.read<AuthCubit>().register(email, password);
     }
-  }
-
-  void _navigateToRegister() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const RegisterPage()),
-    );
   }
 
   @override
@@ -53,13 +48,13 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.status == AuthStatus.authenticated) {
-              // Navigate to home on successful login
+              // Navigate to home on successful registration
               Navigator.of(context).pushReplacementNamed('/');
             } else if (state.status == AuthStatus.failure) {
               // Show error message
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(state.errorMessage ?? 'Login failed'),
+                  content: Text(state.errorMessage ?? 'Registration failed'),
                   backgroundColor: theme.colorScheme.error,
                 ),
               );
@@ -87,13 +82,13 @@ class _LoginPageState extends State<LoginPage> {
                     
                     // Title
                     Text(
-                      'Welcome Back',
+                      'Create Account',
                       style: theme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Sign in to continue',
+                      'Sign up to get started',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: theme.textTheme.bodySmall?.color,
                       ),
@@ -129,16 +124,38 @@ class _LoginPageState extends State<LoginPage> {
                       enabled: !isLoading,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
+                          return 'Please enter a password';
+                        }
+                        if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Confirm password field
+                    AuthTextField(
+                      controller: _confirmPasswordController,
+                      label: 'Confirm Password',
+                      isPassword: true,
+                      prefixIcon: Icons.lock_outlined,
+                      enabled: !isLoading,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please confirm your password';
+                        }
+                        if (value != _passwordController.text) {
+                          return 'Passwords do not match';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 32),
                     
-                    // Login button
+                    // Register button
                     ElevatedButton(
-                      onPressed: isLoading ? null : _handleLogin,
+                      onPressed: isLoading ? null : _handleRegister,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: isLoading
@@ -152,22 +169,24 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               )
-                            : const Text('Sign In'),
+                            : const Text('Create Account'),
                       ),
                     ),
                     const SizedBox(height: 16),
                     
-                    // Register link
+                    // Login link
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\'t have an account? ',
+                          'Already have an account? ',
                           style: theme.textTheme.bodyMedium,
                         ),
                         TextButton(
-                          onPressed: isLoading ? null : _navigateToRegister,
-                          child: const Text('Sign Up'),
+                          onPressed: isLoading
+                              ? null
+                              : () => Navigator.of(context).pop(),
+                          child: const Text('Sign In'),
                         ),
                       ],
                     ),

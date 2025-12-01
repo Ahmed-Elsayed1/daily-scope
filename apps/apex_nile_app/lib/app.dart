@@ -38,6 +38,8 @@ class ApexNileApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Apex Nile',
           theme: buildApexTheme(),
+          darkTheme: buildApexDarkTheme(),
+          themeMode: ThemeMode.system,
           onGenerateRoute: AppRouter.onGenerateRoute,
           initialRoute: AppRouter.dashboard,
         ),

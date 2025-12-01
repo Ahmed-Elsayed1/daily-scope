@@ -8,7 +8,12 @@ import '../../domain/usecases/logout.dart';
 
 part 'auth_cubit.freezed.dart';
 
+/// Cubit for managing authentication state.
+/// 
+/// Handles user authentication operations including login, registration,
+/// logout, and session restoration. Uses [AuthRepository] for data operations.
 class AuthCubit extends Cubit<AuthState> {
+  /// Creates an auth cubit
   AuthCubit({
     required this.repository,
     required this.loginUseCase,
@@ -17,10 +22,16 @@ class AuthCubit extends Cubit<AuthState> {
     _hydrate();
   }
 
+  /// The authentication repository
   final AuthRepository repository;
+  
+  /// Use case for login
   final LoginWithEmailPasswordUseCase loginUseCase;
+  
+  /// Use case for logout
   final LogoutUseCase logoutUseCase;
 
+  /// Restores authentication state on app startup
   Future<void> _hydrate() async {
     final user = await repository.currentUser();
     if (user == null) {
@@ -30,6 +41,24 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  /// Registers a new user with email and password
+  Future<void> register(String email, String password) async {
+    emit(state.copyWith(status: AuthStatus.authenticating, errorMessage: null));
+    try {
+      final user = await repository.registerWithEmailPassword(
+        email: email,
+        password: password,
+      );
+      emit(state.copyWith(status: AuthStatus.authenticated, user: user));
+    } catch (error) {
+      emit(state.copyWith(
+        status: AuthStatus.failure,
+        errorMessage: error.toString().replaceAll('Exception: ', ''),
+      ));
+    }
+  }
+
+  /// Logs in a user with email and password
   Future<void> login(String email, String password) async {
     emit(state.copyWith(status: AuthStatus.authenticating, errorMessage: null));
     try {
@@ -38,17 +67,19 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (error) {
       emit(state.copyWith(
         status: AuthStatus.failure,
-        errorMessage: error.toString(),
+        errorMessage: error.toString().replaceAll('Exception: ', ''),
       ));
     }
   }
 
+  /// Logs out the current user
   Future<void> logout() async {
     await logoutUseCase();
     emit(state.copyWith(status: AuthStatus.unauthenticated, user: null));
   }
 }
 
+/// State for authentication
 @freezed
 class AuthState with _$AuthState {
   const factory AuthState({

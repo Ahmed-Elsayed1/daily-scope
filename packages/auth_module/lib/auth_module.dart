@@ -7,3 +7,4 @@ export 'src/domain/usecases/login_with_email_password.dart';
 export 'src/domain/usecases/logout.dart';
 export 'src/presentation/cubit/auth_cubit.dart';
 export 'src/presentation/view/login_page.dart';
+export 'src/presentation/view/register_page.dart';
