@@ -5,7 +5,6 @@ import 'data/datasources/weather_api_service.dart';
 import 'data/datasources/weather_cache_data_source.dart';
 import 'data/repositories/weather_repository_impl.dart';
 import 'domain/repositories/weather_repository.dart';
-import 'domain/usecases/load_weather_overview.dart';
 import 'presentation/cubit/weather_cubit.dart';
 
 class WeatherModuleFactory {
@@ -22,7 +21,6 @@ class WeatherModuleFactory {
   }
 
   WeatherCubit createCubit(WeatherRepository repository) {
-    return WeatherCubit(
-        loadWeather: LoadWeatherOverviewUseCase(repository: repository));
+    return WeatherCubit(repository);
   }
 }

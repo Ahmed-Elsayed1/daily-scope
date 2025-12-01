@@ -39,9 +39,9 @@ class AppDependencies {
     final httpClient = http.Client();
 
     const newsApiKey =
-        String.fromEnvironment('NEWS_API_KEY', defaultValue: 'CHANGE_ME');
+        String.fromEnvironment('NEWS_API_KEY', defaultValue: '98c54a6d56b2483aa79f723fcd1b8100');
     const weatherApiKey = String.fromEnvironment('OPENWEATHER_API_KEY',
-        defaultValue: 'CHANGE_ME');
+        defaultValue: '0978f98de446c60ab6a55db33f75668d');
 
     const authFactory = AuthModuleFactory();
     final authRepository = await authFactory.createRepository(database);

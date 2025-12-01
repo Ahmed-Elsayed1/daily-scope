@@ -10,6 +10,7 @@ class AppRouter {
   static const String news = '/news';
   static const String weather = '/weather';
   static const String auth = '/auth';
+  static const String articleDetails = '/news/details';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -21,6 +22,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const WeatherPage());
       case auth:
         return MaterialPageRoute(builder: (_) => const LoginPage());
+      case articleDetails:
+        final article = settings.arguments as NewsArticle;
+        return MaterialPageRoute(
+          builder: (_) => ArticleDetailsPage(article: article),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => const AppShell(),

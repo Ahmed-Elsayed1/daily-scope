@@ -17,9 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WeatherState {
   WeatherStatus get status => throw _privateConstructorUsedError;
-  WeatherSnapshot? get snapshot => throw _privateConstructorUsedError;
+  Weather? get currentWeather => throw _privateConstructorUsedError;
+  List<Weather> get forecast => throw _privateConstructorUsedError;
+  List<City> get savedCities => throw _privateConstructorUsedError;
+  List<City> get searchResults => throw _privateConstructorUsedError;
+  City? get currentCity => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
-  DateTime? get lastUpdated => throw _privateConstructorUsedError;
 
   /// Create a copy of WeatherState
   /// with the given fields replaced by the non-null parameter values.
@@ -36,11 +39,15 @@ abstract class $WeatherStateCopyWith<$Res> {
   @useResult
   $Res call(
       {WeatherStatus status,
-      WeatherSnapshot? snapshot,
-      String? errorMessage,
-      DateTime? lastUpdated});
+      Weather? currentWeather,
+      List<Weather> forecast,
+      List<City> savedCities,
+      List<City> searchResults,
+      City? currentCity,
+      String? errorMessage});
 
-  $WeatherSnapshotCopyWith<$Res>? get snapshot;
+  $WeatherCopyWith<$Res>? get currentWeather;
+  $CityCopyWith<$Res>? get currentCity;
 }
 
 /// @nodoc
@@ -59,27 +66,42 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
   @override
   $Res call({
     Object? status = null,
-    Object? snapshot = freezed,
+    Object? currentWeather = freezed,
+    Object? forecast = null,
+    Object? savedCities = null,
+    Object? searchResults = null,
+    Object? currentCity = freezed,
     Object? errorMessage = freezed,
-    Object? lastUpdated = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as WeatherStatus,
-      snapshot: freezed == snapshot
-          ? _value.snapshot
-          : snapshot // ignore: cast_nullable_to_non_nullable
-              as WeatherSnapshot?,
+      currentWeather: freezed == currentWeather
+          ? _value.currentWeather
+          : currentWeather // ignore: cast_nullable_to_non_nullable
+              as Weather?,
+      forecast: null == forecast
+          ? _value.forecast
+          : forecast // ignore: cast_nullable_to_non_nullable
+              as List<Weather>,
+      savedCities: null == savedCities
+          ? _value.savedCities
+          : savedCities // ignore: cast_nullable_to_non_nullable
+              as List<City>,
+      searchResults: null == searchResults
+          ? _value.searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
+              as List<City>,
+      currentCity: freezed == currentCity
+          ? _value.currentCity
+          : currentCity // ignore: cast_nullable_to_non_nullable
+              as City?,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 
@@ -87,13 +109,27 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $WeatherSnapshotCopyWith<$Res>? get snapshot {
-    if (_value.snapshot == null) {
+  $WeatherCopyWith<$Res>? get currentWeather {
+    if (_value.currentWeather == null) {
       return null;
     }
 
-    return $WeatherSnapshotCopyWith<$Res>(_value.snapshot!, (value) {
-      return _then(_value.copyWith(snapshot: value) as $Val);
+    return $WeatherCopyWith<$Res>(_value.currentWeather!, (value) {
+      return _then(_value.copyWith(currentWeather: value) as $Val);
+    });
+  }
+
+  /// Create a copy of WeatherState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CityCopyWith<$Res>? get currentCity {
+    if (_value.currentCity == null) {
+      return null;
+    }
+
+    return $CityCopyWith<$Res>(_value.currentCity!, (value) {
+      return _then(_value.copyWith(currentCity: value) as $Val);
     });
   }
 }
@@ -108,12 +144,17 @@ abstract class _$$WeatherStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {WeatherStatus status,
-      WeatherSnapshot? snapshot,
-      String? errorMessage,
-      DateTime? lastUpdated});
+      Weather? currentWeather,
+      List<Weather> forecast,
+      List<City> savedCities,
+      List<City> searchResults,
+      City? currentCity,
+      String? errorMessage});
 
   @override
-  $WeatherSnapshotCopyWith<$Res>? get snapshot;
+  $WeatherCopyWith<$Res>? get currentWeather;
+  @override
+  $CityCopyWith<$Res>? get currentCity;
 }
 
 /// @nodoc
@@ -130,27 +171,42 @@ class __$$WeatherStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? snapshot = freezed,
+    Object? currentWeather = freezed,
+    Object? forecast = null,
+    Object? savedCities = null,
+    Object? searchResults = null,
+    Object? currentCity = freezed,
     Object? errorMessage = freezed,
-    Object? lastUpdated = freezed,
   }) {
     return _then(_$WeatherStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as WeatherStatus,
-      snapshot: freezed == snapshot
-          ? _value.snapshot
-          : snapshot // ignore: cast_nullable_to_non_nullable
-              as WeatherSnapshot?,
+      currentWeather: freezed == currentWeather
+          ? _value.currentWeather
+          : currentWeather // ignore: cast_nullable_to_non_nullable
+              as Weather?,
+      forecast: null == forecast
+          ? _value._forecast
+          : forecast // ignore: cast_nullable_to_non_nullable
+              as List<Weather>,
+      savedCities: null == savedCities
+          ? _value._savedCities
+          : savedCities // ignore: cast_nullable_to_non_nullable
+              as List<City>,
+      searchResults: null == searchResults
+          ? _value._searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
+              as List<City>,
+      currentCity: freezed == currentCity
+          ? _value.currentCity
+          : currentCity // ignore: cast_nullable_to_non_nullable
+              as City?,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -160,23 +216,56 @@ class __$$WeatherStateImplCopyWithImpl<$Res>
 class _$WeatherStateImpl implements _WeatherState {
   const _$WeatherStateImpl(
       {this.status = WeatherStatus.initial,
-      this.snapshot,
-      this.errorMessage,
-      this.lastUpdated});
+      this.currentWeather,
+      final List<Weather> forecast = const [],
+      final List<City> savedCities = const [],
+      final List<City> searchResults = const [],
+      this.currentCity,
+      this.errorMessage})
+      : _forecast = forecast,
+        _savedCities = savedCities,
+        _searchResults = searchResults;
 
   @override
   @JsonKey()
   final WeatherStatus status;
   @override
-  final WeatherSnapshot? snapshot;
+  final Weather? currentWeather;
+  final List<Weather> _forecast;
+  @override
+  @JsonKey()
+  List<Weather> get forecast {
+    if (_forecast is EqualUnmodifiableListView) return _forecast;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_forecast);
+  }
+
+  final List<City> _savedCities;
+  @override
+  @JsonKey()
+  List<City> get savedCities {
+    if (_savedCities is EqualUnmodifiableListView) return _savedCities;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_savedCities);
+  }
+
+  final List<City> _searchResults;
+  @override
+  @JsonKey()
+  List<City> get searchResults {
+    if (_searchResults is EqualUnmodifiableListView) return _searchResults;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchResults);
+  }
+
+  @override
+  final City? currentCity;
   @override
   final String? errorMessage;
-  @override
-  final DateTime? lastUpdated;
 
   @override
   String toString() {
-    return 'WeatherState(status: $status, snapshot: $snapshot, errorMessage: $errorMessage, lastUpdated: $lastUpdated)';
+    return 'WeatherState(status: $status, currentWeather: $currentWeather, forecast: $forecast, savedCities: $savedCities, searchResults: $searchResults, currentCity: $currentCity, errorMessage: $errorMessage)';
   }
 
   @override
@@ -185,17 +274,29 @@ class _$WeatherStateImpl implements _WeatherState {
         (other.runtimeType == runtimeType &&
             other is _$WeatherStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.snapshot, snapshot) ||
-                other.snapshot == snapshot) &&
+            (identical(other.currentWeather, currentWeather) ||
+                other.currentWeather == currentWeather) &&
+            const DeepCollectionEquality().equals(other._forecast, _forecast) &&
+            const DeepCollectionEquality()
+                .equals(other._savedCities, _savedCities) &&
+            const DeepCollectionEquality()
+                .equals(other._searchResults, _searchResults) &&
+            (identical(other.currentCity, currentCity) ||
+                other.currentCity == currentCity) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated));
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, snapshot, errorMessage, lastUpdated);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      currentWeather,
+      const DeepCollectionEquality().hash(_forecast),
+      const DeepCollectionEquality().hash(_savedCities),
+      const DeepCollectionEquality().hash(_searchResults),
+      currentCity,
+      errorMessage);
 
   /// Create a copy of WeatherState
   /// with the given fields replaced by the non-null parameter values.
@@ -209,18 +310,27 @@ class _$WeatherStateImpl implements _WeatherState {
 abstract class _WeatherState implements WeatherState {
   const factory _WeatherState(
       {final WeatherStatus status,
-      final WeatherSnapshot? snapshot,
-      final String? errorMessage,
-      final DateTime? lastUpdated}) = _$WeatherStateImpl;
+      final Weather? currentWeather,
+      final List<Weather> forecast,
+      final List<City> savedCities,
+      final List<City> searchResults,
+      final City? currentCity,
+      final String? errorMessage}) = _$WeatherStateImpl;
 
   @override
   WeatherStatus get status;
   @override
-  WeatherSnapshot? get snapshot;
+  Weather? get currentWeather;
+  @override
+  List<Weather> get forecast;
+  @override
+  List<City> get savedCities;
+  @override
+  List<City> get searchResults;
+  @override
+  City? get currentCity;
   @override
   String? get errorMessage;
-  @override
-  DateTime? get lastUpdated;
 
   /// Create a copy of WeatherState
   /// with the given fields replaced by the non-null parameter values.

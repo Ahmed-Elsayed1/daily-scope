@@ -4,9 +4,14 @@ import 'package:intl/intl.dart';
 import '../../domain/entities/news_article.dart';
 
 class NewsArticleCard extends StatelessWidget {
-  const NewsArticleCard({super.key, required this.article});
+  const NewsArticleCard({
+    super.key,
+    required this.article,
+    this.onTap,
+  });
 
   final NewsArticle article;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,7 @@ class NewsArticleCard extends StatelessWidget {
           ],
         ),
         trailing: const Icon(Icons.chevron_right),
-        onTap: () {},
+        onTap: onTap,
       ),
     );
   }

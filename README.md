@@ -42,31 +42,26 @@ Each feature module follows **clean architecture**:
   - Session persistence across app restarts
   - SQLite-based credential storage
 
-- **📰 News (Core Complete)**
+- **📰 News (Complete)**
   - NewsAPI integration with pagination
   - Search articles by keyword
   - Filter by category
   - SQLite caching for offline access
   - Article list with images and metadata
+  - WebView article details page
+  - Pull-to-refresh UI
 
-### 🔨 Partially Implemented
+- **🌤️ Weather (Complete)**
+  - OpenWeather API service (Current, Forecast, Geocoding)
+  - City search and management
+  - Weather data caching (SQLite)
+  - Current weather and 5-day forecast UI
+  - Multiple city support
 
-- **📰 News (UI Enhancements Needed)**
-  - Need: WebView article details page
-  - Need: Pull-to-refresh UI
-  - Need: Search bar in UI
-  - Need: Category filter chips  
-
-- **🌤️ Weather (Implementation Required)**
-  - Need: OpenWeather API service
-  - Need: City search via Geocoding API
-  - Need: Weather data caching
-  - Need: Hourly/daily forecast UI
-  - Need: City management
-
-- **🏠 Dashboard (Enhancement Needed)**
-  - Need: Combine news + weather overview
-  - Need: Navigation to detail pages
+- **🏠 Dashboard (Complete)**
+  - Combined news and weather overview
+  - Navigation to detail pages
+  - Offline status banner
 
 ---
 
@@ -152,13 +147,13 @@ melos run clean
 | Workspace Setup | ✅ Complete | 100% |
 | Design System | ✅ Complete | 100% |
 | Authentication | ✅ Complete | 100% |
-| News - Core | ✅ Complete | 80% |
-| News - UI | 🔨 Partial | 60% |
-| Weather - Core | 🔨 Partial | 20% |
-| Weather - UI | ⏳ Pending | 10% |
-| Routing/Nav | 🔨 Partial | 50% |
-| Dashboard | 🔨 Partial | 40% |
-| Offline Support | ✅ Complete | 90% |
+| News - Core | ✅ Complete | 100% |
+| News - UI | ✅ Complete | 100% |
+| Weather - Core | ✅ Complete | 100% |
+| Weather - UI | ✅ Complete | 100% |
+| Routing/Nav | ✅ Complete | 100% |
+| Dashboard | ✅ Complete | 100% |
+| Offline Support | ✅ Complete | 100% |
 
 ---
 
