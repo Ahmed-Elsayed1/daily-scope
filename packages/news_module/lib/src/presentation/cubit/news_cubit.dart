@@ -12,19 +12,19 @@ part 'news_cubit.freezed.dart';
 enum NewsStatus {
   /// Initial state
   initial,
-  
+
   /// Loading data
   loading,
-  
-  /// Successfully loaded  
+
+  /// Successfully loaded
   success,
-  
+
   /// Error occurred
   failure,
 }
 
 /// Cubit for managing news state.
-/// 
+///
 /// Handles fetching, searching, filtering, and caching of  news articles.
 class NewsCubit extends Cubit<NewsState> {
   /// Creates a news cubit
@@ -56,16 +56,16 @@ class NewsCubit extends Cubit<NewsState> {
 
   /// Loads the next page of articles
   Future<void> loadNextPage() async {
-    if (state.hasReachedMax || state.status == NewsStatus.loading) {
+    if (state.hasReachedMax) {
       return;
     }
-    
+
     emit(state.copyWith(status: NewsStatus.loading, errorMessage: null));
     final nextPage = state.articles.isEmpty ? 1 : state.page + 1;
-    
+
     try {
       List<NewsArticle> articles;
-      
+
       // Determine which fetch method to use based on current filter/search
       if (state.searchQuery != null && state.searchQuery!.isNotEmpty) {
         articles = await _repository.searchArticles(
@@ -80,7 +80,7 @@ class NewsCubit extends Cubit<NewsState> {
       } else {
         articles = await fetchHeadlines(page: nextPage);
       }
-      
+
       emit(state.copyWith(
         status: NewsStatus.success,
         articles: [...state.articles, ...articles],
@@ -105,10 +105,10 @@ class NewsCubit extends Cubit<NewsState> {
       errorMessage: null,
       articles: [], // Clear existing articles
     ));
-    
+
     try {
       List<NewsArticle> articles;
-      
+
       if (state.searchQuery != null && state.searchQuery!.isNotEmpty) {
         articles = await _repository.searchArticles(
           query: state.searchQuery!,
@@ -122,7 +122,7 @@ class NewsCubit extends Cubit<NewsState> {
       } else {
         articles = await refreshHeadlines();
       }
-      
+
       emit(state.copyWith(
         status: NewsStatus.success,
         articles: articles,
@@ -149,7 +149,7 @@ class NewsCubit extends Cubit<NewsState> {
       status: NewsStatus.loading,
       errorMessage: null,
     ));
-    
+
     await loadNextPage();
   }
 
@@ -164,7 +164,7 @@ class NewsCubit extends Cubit<NewsState> {
       status: NewsStatus.loading,
       errorMessage: null,
     ));
-    
+
     await loadNextPage();
   }
 
@@ -179,7 +179,7 @@ class NewsCubit extends Cubit<NewsState> {
       status: NewsStatus.loading,
       errorMessage: null,
     ));
-    
+
     await loadNextPage();
   }
 }

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/news_article_model.dart';
 
 /// Service for fetching news data from NewsAPI.
-/// 
+///
 /// Provides methods for fetching headlines, searching articles, and filtering by category.
 /// API documentation: https://newsapi.org/docs
 class NewsApiService {
@@ -38,7 +38,7 @@ class NewsApiService {
         'apiKey': apiKey,
       },
     );
-    
+
     return _fetchArticles(uri);
   }
 
@@ -58,7 +58,7 @@ class NewsApiService {
         'apiKey': apiKey,
       },
     );
-    
+
     return _fetchArticles(uri);
   }
 
@@ -78,7 +78,7 @@ class NewsApiService {
         'apiKey': apiKey,
       },
     );
-    
+
     return _fetchArticles(uri);
   }
 
@@ -86,34 +86,37 @@ class NewsApiService {
   Future<List<NewsArticleModel>> _fetchArticles(Uri uri) async {
     try {
       final response = await client.get(uri);
-      
+
       if (response.statusCode != 200) {
-        throw Exception('Failed to load articles: ${response.statusCode} ${response.body}');
+        throw Exception(
+            'Failed to load articles: ${response.statusCode} ${response.body}');
       }
-      
+
       final payload = jsonDecode(response.body) as Map<String, dynamic>;
-      
+
       if (payload['status'] != 'ok') {
         throw Exception(payload['message'] ?? 'Unknown error from NewsAPI');
       }
-      
-      final articles = (payload['articles'] as List<dynamic>)
-          .cast<Map<String, dynamic>>();
-      
+
+      final articles =
+          (payload['articles'] as List<dynamic>).cast<Map<String, dynamic>>();
+
       return articles.map((json) {
         return NewsArticleModel(
-          id: json['url'] as String? ?? 
+          id: json['url'] as String? ??
               '${json['title']}_${json['publishedAt']}',
           title: json['title'] as String? ?? 'Untitled',
           description: json['description'] as String?,
           content: json['content'] as String?,
           url: json['url'] as String? ?? '',
           imageUrl: json['urlToImage'] as String?,
-          source: (json['source'] as Map<String, dynamic>?)?['name'] as String? ?? 
+          source:
+              (json['source'] as Map<String, dynamic>?)?['name'] as String? ??
                   'Unknown',
           author: json['author'] as String?,
-          publishedAt: DateTime.tryParse(json['publishedAt'] as String? ?? '') ?? 
-                      DateTime.now(),
+          publishedAt:
+              DateTime.tryParse(json['publishedAt'] as String? ?? '') ??
+                  DateTime.now(),
         );
       }).toList();
     } catch (e) {

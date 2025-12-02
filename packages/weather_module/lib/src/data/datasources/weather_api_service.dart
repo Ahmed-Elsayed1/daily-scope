@@ -7,7 +7,7 @@ import '../models/weather_model.dart';
 import '../models/weather_snapshot_model.dart';
 
 /// Service for interacting with OpenWeather API.
-/// 
+///
 /// Provides methods for current weather, forecast, and city search.
 class WeatherApiService {
   /// Creates a weather API service
@@ -23,7 +23,7 @@ class WeatherApiService {
 
   /// Fetches current weather for a location
   Future<WeatherModel> getWeather(double lat, double lon) async {
-    final uri = Uri.parse('$baseUrl/data/3.0/onecall?lat=').replace(
+    final uri = Uri.parse('$baseUrl/data/2.5/weather').replace(
       queryParameters: {
         'lat': '$lat',
         'lon': '$lon',
@@ -33,7 +33,7 @@ class WeatherApiService {
     );
 
     final response = await client.get(uri);
-    
+
     if (response.statusCode != 200) {
       throw Exception('Failed to load weather: ${response.statusCode}');
     }
@@ -54,14 +54,14 @@ class WeatherApiService {
     );
 
     final response = await client.get(uri);
-    
+
     if (response.statusCode != 200) {
       throw Exception('Failed to load forecast: ${response.statusCode}');
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     final list = json['list'] as List<dynamic>;
-    
+
     return list
         .map((item) => WeatherModel.fromJson(item as Map<String, dynamic>))
         .toList();
@@ -78,13 +78,13 @@ class WeatherApiService {
     );
 
     final response = await client.get(uri);
-    
+
     if (response.statusCode != 200) {
       throw Exception('Failed to search city: ${response.statusCode}');
     }
 
     final list = jsonDecode(response.body) as List<dynamic>;
-    
+
     return list
         .map((item) => CityModel.fromJson(item as Map<String, dynamic>))
         .toList();
@@ -95,8 +95,8 @@ class WeatherApiService {
     required double latitude,
     required double longitude,
   }) async {
-    // Use OneCall API 3.0 for comprehensive weather data
-    final uri = Uri.parse('$baseUrl/data/3.0/onecall').replace(
+    // Use OneCall API 2.5 for comprehensive weather data
+    final uri = Uri.parse('$baseUrl/data/2.5/onecall').replace(
       queryParameters: {
         'lat': '$latitude',
         'lon': '$longitude',
@@ -109,7 +109,8 @@ class WeatherApiService {
     final response = await client.get(uri);
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to fetch weather snapshot: ${response.statusCode} - ${response.body}');
+      throw Exception(
+          'Failed to fetch weather snapshot: ${response.statusCode} - ${response.body}');
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
@@ -118,8 +119,10 @@ class WeatherApiService {
 
   WeatherSnapshotModel _mapToSnapshotModel(Map<String, dynamic> json) {
     final current = json['current'] as Map<String, dynamic>? ?? {};
-    final hourly = (json['hourly'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
-    final daily = (json['daily'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final hourly =
+        (json['hourly'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final daily =
+        (json['daily'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
 
     // Extract hourly temperatures (next 24 hours)
     final hourlyTemps = hourly
@@ -128,24 +131,19 @@ class WeatherApiService {
         .toList();
 
     // Extract daily highs and lows (7 days)
-    final dailyHighs = daily
-        .take(7)
-        .map((entry) {
-          final temp = entry['temp'] as Map<String, dynamic>?;
-          return (temp?['max'] as num?)?.toDouble() ?? 0.0;
-        })
-        .toList();
+    final dailyHighs = daily.take(7).map((entry) {
+      final temp = entry['temp'] as Map<String, dynamic>?;
+      return (temp?['max'] as num?)?.toDouble() ?? 0.0;
+    }).toList();
 
-    final dailyLows = daily
-        .take(7)
-        .map((entry) {
-          final temp = entry['temp'] as Map<String, dynamic>?;
-          return (temp?['min'] as num?)?.toDouble() ?? 0.0;
-        })
-        .toList();
+    final dailyLows = daily.take(7).map((entry) {
+      final temp = entry['temp'] as Map<String, dynamic>?;
+      return (temp?['min'] as num?)?.toDouble() ?? 0.0;
+    }).toList();
 
     final currentTemp = (current['temp'] as num?)?.toDouble() ?? 0.0;
-    final weather = (current['weather'] as List<dynamic>?)?.first as Map<String, dynamic>?;
+    final weather =
+        (current['weather'] as List<dynamic>?)?.first as Map<String, dynamic>?;
     final condition = weather?['description'] as String? ?? 'Unknown';
 
     // Use first day's high/low as current high/low
