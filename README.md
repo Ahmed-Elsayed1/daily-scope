@@ -89,7 +89,7 @@ Each feature module follows **clean architecture**:
    dart pub global activate melos
    
    # Bootstrap the workspace
-   melos bootstrap
+   melos get
    ```
 
 3. **Generate code** (for Freezed models)
