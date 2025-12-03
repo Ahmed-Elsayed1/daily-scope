@@ -52,23 +52,24 @@ class WeatherModel {
       windSpeed: (wind['speed'] as num).toDouble(),
       description: weather['description'] as String,
       iconCode: weather['icon'] as String,
-      timestamp: DateTime.fromMillisecondsSinceEpoch((json['dt'] as int) * 1000),
+      timestamp:
+          DateTime.fromMillisecondsSinceEpoch((json['dt'] as int) * 1000),
       cityName: json['name'] as String?,
     );
   }
-  
+
   Map<String, dynamic> toMap() => {
-    'temperature': temperature,
-    'feels_like': feelsLike,
-    'temp_min': tempMin,
-    'temp_max': tempMax,
-    'humidity': humidity,
-    'wind_speed': windSpeed,
-    'description': description,
-    'icon_code': iconCode,
-    'timestamp': timestamp.toIso8601String(),
-    'city_name': cityName,
-  };
+        'temperature': temperature,
+        'feels_like': feelsLike,
+        'temp_min': tempMin,
+        'temp_max': tempMax,
+        'humidity': humidity,
+        'wind_speed': windSpeed,
+        'description': description,
+        'icon_code': iconCode,
+        'timestamp': timestamp.toIso8601String(),
+        'city_name': cityName,
+      };
 
   factory WeatherModel.fromMap(Map<String, dynamic> map) {
     return WeatherModel(

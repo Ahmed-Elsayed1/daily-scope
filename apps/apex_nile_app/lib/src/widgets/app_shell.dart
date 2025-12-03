@@ -1,10 +1,10 @@
-import 'package:auth_module/auth_module.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:news_module/news_module.dart';
 import 'package:weather_module/weather_module.dart';
 
+import '../features/account/view/account_page.dart';
 import '../features/dashboard/view/dashboard_page.dart';
-import '../design_system/colors.dart';
 import 'offline_status_banner.dart';
 
 class AppShell extends StatefulWidget {
@@ -21,7 +21,7 @@ class _AppShellState extends State<AppShell> {
         DashboardPage(),
         NewsPage(),
         WeatherPage(),
-        LoginPage(),
+        AccountPage(),
       ];
 
   @override
@@ -43,7 +43,7 @@ class _AppShellState extends State<AppShell> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (index) => setState(() => _currentIndex = index),
-        indicatorColor: AppColors.amber.withOpacity(0.2),
+        indicatorColor: AppColors.amber.withValues(alpha: 0.2),
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.dashboard_outlined),

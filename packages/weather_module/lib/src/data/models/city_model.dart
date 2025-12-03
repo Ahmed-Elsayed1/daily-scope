@@ -34,12 +34,12 @@ class CityModel {
   }
 
   Map<String, dynamic> toMap() => {
-    'name': name,
-    'lat': lat,
-    'lon': lon,
-    'country': country,
-    'state': state,
-  };
+        'name': name,
+        'lat': lat,
+        'lon': lon,
+        'country': country,
+        'state': state,
+      };
 
   factory CityModel.fromMap(Map<String, dynamic> map) {
     return CityModel(
@@ -50,7 +50,7 @@ class CityModel {
       state: map['state'] as String?,
     );
   }
-  
+
   factory CityModel.fromEntity(City city) {
     return CityModel(
       name: city.name,

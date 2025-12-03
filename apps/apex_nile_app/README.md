@@ -15,7 +15,7 @@ flutter run \
 ## Architecture highlights
 
 - `lib/src/core` – dependency injection, routing, connectivity, persistence.
-- `lib/src/design_system` – color/typography/spacing tokens + `ThemeData`.
+- `packages/common/lib` – shared design tokens, theming, and UI primitives (`AppText`, `AppButton`).
 - `lib/src/widgets` – application shell widgets with bottom navigation + offline banner.
 - `lib/src/features/dashboard` – simple overview surface stitching together feature states.
 

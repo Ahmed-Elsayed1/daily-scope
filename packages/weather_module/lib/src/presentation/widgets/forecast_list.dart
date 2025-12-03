@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -15,8 +16,8 @@ class ForecastList extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Text(
-            '5-Day Forecast',
+          child: AppText(
+            '7-Day Forecast',
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
@@ -36,20 +37,21 @@ class ForecastList extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      AppText(
                         DateFormat('E, HH:mm').format(item.timestamp),
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 8),
                       // Placeholder for icon (would use item.iconCode)
-                      const Icon(Icons.wb_sunny, size: 32, color: Colors.orange),
+                      const Icon(Icons.wb_sunny,
+                          size: 32, color: Colors.orange),
                       const SizedBox(height: 8),
-                      Text(
+                      AppText(
                         '${item.temperature.round()}°',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      Text(
+                      AppText(
                         item.description,
                         style: Theme.of(context).textTheme.bodySmall,
                         maxLines: 1,

@@ -1,13 +1,13 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/auth_text_field.dart';
 import 'register_page.dart';
 
 /// Login page for user authentication.
-/// 
+///
 /// Allows users to sign in with email and password.
 /// Provides navigation to registration for new users.
 class LoginPage extends StatefulWidget {
@@ -47,27 +47,34 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Scaffold(
       body: SafeArea(
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
-            if (state.status == AuthStatus.authenticated) {
-              // Navigate to home on successful login
-              Navigator.of(context).pushReplacementNamed('/');
-            } else if (state.status == AuthStatus.failure) {
-              // Show error message
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage ?? 'Login failed'),
-                  backgroundColor: theme.colorScheme.error,
-                ),
-              );
-            }
+            state.maybeWhen(
+              authenticated: (_) {
+                // Navigate to home on successful login
+                Navigator.of(context).pushReplacementNamed('/');
+              },
+              failure: (message) {
+                // Show error message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: AppText(message),
+                    backgroundColor: theme.colorScheme.error,
+                  ),
+                );
+              },
+              orElse: () {},
+            );
           },
           builder: (context, state) {
-            final isLoading = state.status == AuthStatus.authenticating;
-            
+            final isLoading = state.maybeWhen(
+              authenticating: () => true,
+              orElse: () => false,
+            );
+
             return SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
               child: Form(
@@ -76,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 48),
-                    
+
                     // App icon or logo placeholder
                     Icon(
                       Icons.account_circle,
@@ -84,15 +91,15 @@ class _LoginPageState extends State<LoginPage> {
                       color: theme.colorScheme.primary,
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Title
-                    Text(
+                    AppText(
                       'Welcome Back',
                       style: theme.textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
-                    Text(
+                    AppText(
                       'Sign in to continue',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: theme.textTheme.bodySmall?.color,
@@ -100,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 48),
-                    
+
                     // Email field
                     AuthTextField(
                       controller: _emailController,
@@ -119,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Password field
                     AuthTextField(
                       controller: _passwordController,
@@ -135,39 +142,26 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     const SizedBox(height: 32),
-                    
+
                     // Login button
-                    ElevatedButton(
+                    AppButton.primary(
+                      label: 'Sign In',
                       onPressed: isLoading ? null : _handleLogin,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: isLoading
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white,
-                                  ),
-                                ),
-                              )
-                            : const Text('Sign In'),
-                      ),
+                      isLoading: isLoading,
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Register link
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        AppText(
                           'Don\'t have an account? ',
                           style: theme.textTheme.bodyMedium,
                         ),
-                        TextButton(
+                        AppButton.tertiary(
+                          label: 'Sign Up',
                           onPressed: isLoading ? null : _navigateToRegister,
-                          child: const Text('Sign Up'),
                         ),
                       ],
                     ),

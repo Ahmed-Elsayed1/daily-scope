@@ -286,7 +286,7 @@ dart pub global activate melos
 
 ## 📖 Documentation
 
-- **Design System**: See `/apps/apex_nile_app/lib/src/design_system/`
+- **Design System**: See `/packages/common/lib/` for colors, typography, spacing, and shared widgets
 - **Authentication**: See `/packages/auth_module/`
 - **News**: See `/packages/news_module/`  
 - **Weather**: See `/packages/weather_module/`

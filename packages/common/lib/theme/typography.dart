@@ -94,7 +94,7 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     height: 1.0,
   );
-  
+
   /// Button Small - 14sp, SemiBold
   static const TextStyle buttonSmall = TextStyle(
     fontSize: 14,

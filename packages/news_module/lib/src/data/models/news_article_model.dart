@@ -1,7 +1,7 @@
 import '../../domain/entities/news_article.dart';
 
 /// Data model for news articles from the NewsAPI.
-/// 
+///
 /// Maps between the API JSON format and the domain entity.
 class NewsArticleModel {
   /// Creates a news article model

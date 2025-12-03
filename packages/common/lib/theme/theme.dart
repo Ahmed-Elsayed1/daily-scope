@@ -9,19 +9,18 @@ import 'typography.dart';
 /// Uses design system tokens for consistent styling.
 ThemeData buildApexTheme() {
   final base = ThemeData.light();
-  
+
   return base.copyWith(
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.deepBlue,
       primary: AppColors.deepBlue,
       secondary: AppColors.amber,
       surface: AppColors.surface,
-      background: AppColors.background,
       error: AppColors.error,
       brightness: Brightness.light,
     ),
     scaffoldBackgroundColor: AppColors.background,
-    
+
     // AppBar styling
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.deepBlue,
@@ -34,22 +33,32 @@ ThemeData buildApexTheme() {
         color: Colors.white,
       ),
     ),
-    
+
     // Text theme using design tokens
     textTheme: base.textTheme.copyWith(
-      headlineLarge: AppTextStyles.headlineLarge.copyWith(color: AppColors.textPrimary),
-      headlineMedium: AppTextStyles.headlineMedium.copyWith(color: AppColors.deepBlue),
-      headlineSmall: AppTextStyles.headlineSmall.copyWith(color: AppColors.textPrimary),
-      titleLarge: AppTextStyles.titleLarge.copyWith(color: AppColors.textPrimary),
-      titleMedium: AppTextStyles.titleMedium.copyWith(color: AppColors.textPrimary),
-      titleSmall: AppTextStyles.titleSmall.copyWith(color: AppColors.textPrimary),
+      headlineLarge:
+          AppTextStyles.headlineLarge.copyWith(color: AppColors.textPrimary),
+      headlineMedium:
+          AppTextStyles.headlineMedium.copyWith(color: AppColors.deepBlue),
+      headlineSmall:
+          AppTextStyles.headlineSmall.copyWith(color: AppColors.textPrimary),
+      titleLarge:
+          AppTextStyles.titleLarge.copyWith(color: AppColors.textPrimary),
+      titleMedium:
+          AppTextStyles.titleMedium.copyWith(color: AppColors.textPrimary),
+      titleSmall:
+          AppTextStyles.titleSmall.copyWith(color: AppColors.textPrimary),
       bodyLarge: AppTextStyles.bodyLarge.copyWith(color: AppColors.textPrimary),
-      bodyMedium: AppTextStyles.bodyMedium.copyWith(color: AppColors.textPrimary),
-      bodySmall: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
-      labelLarge: AppTextStyles.labelLarge.copyWith(color: AppColors.deepBlueAlt),
-      labelMedium: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
+      bodyMedium:
+          AppTextStyles.bodyMedium.copyWith(color: AppColors.textPrimary),
+      bodySmall:
+          AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+      labelLarge:
+          AppTextStyles.labelLarge.copyWith(color: AppColors.deepBlueAlt),
+      labelMedium:
+          AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
     ),
-    
+
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -72,7 +81,7 @@ ThemeData buildApexTheme() {
       ),
       contentPadding: AppSpacing.allMd,
     ),
-    
+
     // Button themes
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -89,7 +98,7 @@ ThemeData buildApexTheme() {
         elevation: 2,
       ),
     ),
-    
+
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.deepBlue,
@@ -100,7 +109,7 @@ ThemeData buildApexTheme() {
         ),
       ),
     ),
-    
+
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.deepBlue,
@@ -115,13 +124,13 @@ ThemeData buildApexTheme() {
         textStyle: AppTextStyles.button,
       ),
     ),
-    
+
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColors.amber,
       foregroundColor: AppColors.deepBlue,
       elevation: 4,
     ),
-    
+
     // Card theme
     cardTheme: CardTheme(
       color: AppColors.surface,
@@ -132,14 +141,14 @@ ThemeData buildApexTheme() {
       ),
       margin: AppSpacing.allMd,
     ),
-    
+
     // Divider theme
     dividerTheme: const DividerThemeData(
       color: AppColors.border,
       thickness: 1,
       space: AppSpacing.md,
     ),
-    
+
     // Chip theme
     chipTheme: ChipThemeData(
       backgroundColor: AppColors.surface,
@@ -157,19 +166,18 @@ ThemeData buildApexTheme() {
 /// Uses design system tokens for consistent styling.
 ThemeData buildApexDarkTheme() {
   final base = ThemeData.dark();
-  
+
   return base.copyWith(
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.deepBlue,
       primary: AppColors.amber,
       secondary: AppColors.deepBlue,
       surface: AppColors.surfaceDark,
-      background: AppColors.backgroundDark,
       error: AppColors.error,
       brightness: Brightness.dark,
     ),
     scaffoldBackgroundColor: AppColors.backgroundDark,
-    
+
     // AppBar styling
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.surfaceDark,
@@ -182,22 +190,32 @@ ThemeData buildApexDarkTheme() {
         color: AppColors.textPrimaryDark,
       ),
     ),
-    
+
     // Text theme using design tokens
     textTheme: base.textTheme.copyWith(
-      headlineLarge: AppTextStyles.headlineLarge.copyWith(color: AppColors.textPrimaryDark),
-      headlineMedium: AppTextStyles.headlineMedium.copyWith(color: AppColors.amber),
-      headlineSmall: AppTextStyles.headlineSmall.copyWith(color: AppColors.textPrimaryDark),
-      titleLarge: AppTextStyles.titleLarge.copyWith(color: AppColors.textPrimaryDark),
-      titleMedium: AppTextStyles.titleMedium.copyWith(color: AppColors.textPrimaryDark),
-      titleSmall: AppTextStyles.titleSmall.copyWith(color: AppColors.textPrimaryDark),
-      bodyLarge: AppTextStyles.bodyLarge.copyWith(color: AppColors.textPrimaryDark),
-      bodyMedium: AppTextStyles.bodyMedium.copyWith(color: AppColors.textPrimaryDark),
-      bodySmall: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondaryDark),
+      headlineLarge: AppTextStyles.headlineLarge
+          .copyWith(color: AppColors.textPrimaryDark),
+      headlineMedium:
+          AppTextStyles.headlineMedium.copyWith(color: AppColors.amber),
+      headlineSmall: AppTextStyles.headlineSmall
+          .copyWith(color: AppColors.textPrimaryDark),
+      titleLarge:
+          AppTextStyles.titleLarge.copyWith(color: AppColors.textPrimaryDark),
+      titleMedium:
+          AppTextStyles.titleMedium.copyWith(color: AppColors.textPrimaryDark),
+      titleSmall:
+          AppTextStyles.titleSmall.copyWith(color: AppColors.textPrimaryDark),
+      bodyLarge:
+          AppTextStyles.bodyLarge.copyWith(color: AppColors.textPrimaryDark),
+      bodyMedium:
+          AppTextStyles.bodyMedium.copyWith(color: AppColors.textPrimaryDark),
+      bodySmall:
+          AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondaryDark),
       labelLarge: AppTextStyles.labelLarge.copyWith(color: AppColors.amber),
-      labelMedium: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondaryDark),
+      labelMedium: AppTextStyles.labelMedium
+          .copyWith(color: AppColors.textSecondaryDark),
     ),
-    
+
     // Input decoration
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -220,7 +238,7 @@ ThemeData buildApexDarkTheme() {
       ),
       contentPadding: AppSpacing.allMd,
     ),
-    
+
     // Button themes
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -237,7 +255,7 @@ ThemeData buildApexDarkTheme() {
         elevation: 2,
       ),
     ),
-    
+
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.amber,
@@ -248,7 +266,7 @@ ThemeData buildApexDarkTheme() {
         ),
       ),
     ),
-    
+
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.amber,
@@ -263,13 +281,13 @@ ThemeData buildApexDarkTheme() {
         textStyle: AppTextStyles.button,
       ),
     ),
-    
+
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColors.amber,
       foregroundColor: AppColors.deepBlue,
       elevation: 4,
     ),
-    
+
     // Card theme
     cardTheme: CardTheme(
       color: AppColors.surfaceDark,
@@ -280,19 +298,20 @@ ThemeData buildApexDarkTheme() {
       ),
       margin: AppSpacing.allMd,
     ),
-    
+
     // Divider theme
     dividerTheme: const DividerThemeData(
       color: AppColors.borderDark,
       thickness: 1,
       space: AppSpacing.md,
     ),
-    
+
     // Chip theme
     chipTheme: ChipThemeData(
       backgroundColor: AppColors.surfaceDark,
       selectedColor: AppColors.amber,
-      labelStyle: AppTextStyles.labelMedium.copyWith(color: AppColors.textPrimaryDark),
+      labelStyle:
+          AppTextStyles.labelMedium.copyWith(color: AppColors.textPrimaryDark),
       padding: AppSpacing.allSm,
       shape: RoundedRectangleBorder(
         borderRadius: AppRadius.small,

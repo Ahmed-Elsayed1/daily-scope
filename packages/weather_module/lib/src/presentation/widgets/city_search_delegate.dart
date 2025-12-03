@@ -33,14 +33,14 @@ class CitySearchDelegate extends SearchDelegate<City?> {
   @override
   Widget buildResults(BuildContext context) {
     weatherCubit.searchCities(query);
-    
+
     return BlocBuilder<WeatherCubit, WeatherState>(
       bloc: weatherCubit,
       builder: (context, state) {
         if (state.searchResults.isEmpty) {
           return const Center(child: Text('No cities found'));
         }
-        
+
         return ListView.builder(
           itemCount: state.searchResults.length,
           itemBuilder: (context, index) {

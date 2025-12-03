@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,7 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weather'),
+        title: const AppText('Weather'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -24,7 +25,7 @@ class WeatherPage extends StatelessWidget {
                 context: context,
                 delegate: CitySearchDelegate(cubit),
               );
-              
+
               if (city != null) {
                 cubit.saveCity(city);
                 cubit.selectCity(city);
@@ -39,7 +40,7 @@ class WeatherPage extends StatelessWidget {
           if (state.status == WeatherStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           }
-          
+
           if (state.status == WeatherStatus.failure) {
             return Center(
               child: Column(
@@ -47,31 +48,35 @@ class WeatherPage extends StatelessWidget {
                 children: [
                   const Icon(Icons.error_outline, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
-                  Text(state.errorMessage ?? 'Failed to load weather'),
+                  AppText(state.errorMessage ?? 'Failed to load weather'),
                   const SizedBox(height: 16),
-                  ElevatedButton(
+                  AppButton.primary(
+                    label: 'Retry',
                     onPressed: () {
                       if (state.currentCity != null) {
-                        context.read<WeatherCubit>().selectCity(state.currentCity!);
+                        context
+                            .read<WeatherCubit>()
+                            .selectCity(state.currentCity!);
                       }
                     },
-                    child: const Text('Retry'),
                   ),
                 ],
               ),
             );
           }
-          
+
           if (state.currentWeather == null) {
             return const Center(
-              child: Text('Search for a city to see the weather'),
+              child: AppText('Search for a city to see the weather'),
             );
           }
 
           return RefreshIndicator(
             onRefresh: () async {
               if (state.currentCity != null) {
-                await context.read<WeatherCubit>().selectCity(state.currentCity!);
+                await context
+                    .read<WeatherCubit>()
+                    .selectCity(state.currentCity!);
               }
             },
             child: SingleChildScrollView(
@@ -106,7 +111,7 @@ class _SavedCitiesDrawer extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
                 child: const Center(
-                  child: Text(
+                  child: AppText(
                     'Saved Cities',
                     style: TextStyle(
                       color: Colors.white,
@@ -122,10 +127,10 @@ class _SavedCitiesDrawer extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final city = state.savedCities[index];
                     final isSelected = city == state.currentCity;
-                    
+
                     return ListTile(
-                      title: Text(city.name),
-                      subtitle: Text(city.country ?? ''),
+                      title: AppText(city.name),
+                      subtitle: AppText(city.country ?? ''),
                       selected: isSelected,
                       trailing: IconButton(
                         icon: const Icon(Icons.delete_outline),

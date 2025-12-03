@@ -22,6 +22,8 @@ dependencies:
   path_provider: ^2.1.2
   sqflite: ^2.3.3
   webview_flutter: ^4.4.2
+  common:
+    path: ../../packages/common
   auth_module:
     path: ../../packages/auth_module
   news_module:

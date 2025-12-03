@@ -6,21 +6,20 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 enum ConnectivityStatus {
   /// Connected to network
   online,
-  
+
   /// Not connected to network
   offline,
 }
 
 /// Service for monitoring network connectivity status.
-/// 
+///
 /// Provides both stream-based updates and one-time checks for connectivity status.
 /// Uses the connectivity_plus package to detect network changes.
 class ConnectivityService {
   ConnectivityService() {
     _subscription = _connectivity.onConnectivityChanged.listen(
       (results) => _handleConnectivity(
-        results.isEmpty ? ConnectivityResult.none : results.first
-      ),
+          results.isEmpty ? ConnectivityResult.none : results.first),
     );
     _seedInitialStatus();
   }

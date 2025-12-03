@@ -16,19 +16,66 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NewsState {
-  NewsStatus get status => throw _privateConstructorUsedError;
-  List<NewsArticle> get articles => throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
-  bool get hasReachedMax => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
-  DateTime? get lastUpdated => throw _privateConstructorUsedError;
-  String? get searchQuery => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
-
-  /// Create a copy of NewsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $NewsStateCopyWith<NewsState> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<NewsArticle> articles,
+            int page,
+            bool hasReachedMax,
+            String? searchQuery,
+            String? category,
+            bool isLoadingMore)
+        loaded,
+    required TResult Function(String message) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult? Function(String message)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Failure value) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Failure value)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -36,16 +83,6 @@ mixin _$NewsState {
 abstract class $NewsStateCopyWith<$Res> {
   factory $NewsStateCopyWith(NewsState value, $Res Function(NewsState) then) =
       _$NewsStateCopyWithImpl<$Res, NewsState>;
-  @useResult
-  $Res call(
-      {NewsStatus status,
-      List<NewsArticle> articles,
-      int page,
-      bool hasReachedMax,
-      String? errorMessage,
-      DateTime? lastUpdated,
-      String? searchQuery,
-      String? category});
 }
 
 /// @nodoc
@@ -60,80 +97,285 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
 
   /// Create a copy of NewsState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
+}
+
+/// @nodoc
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$NewsStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
+
   @override
-  $Res call({
-    Object? status = null,
-    Object? articles = null,
-    Object? page = null,
-    Object? hasReachedMax = null,
-    Object? errorMessage = freezed,
-    Object? lastUpdated = freezed,
-    Object? searchQuery = freezed,
-    Object? category = freezed,
+  String toString() {
+    return 'NewsState.initial()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<NewsArticle> articles,
+            int page,
+            bool hasReachedMax,
+            String? searchQuery,
+            String? category,
+            bool isLoadingMore)
+        loaded,
+    required TResult Function(String message) failure,
   }) {
-    return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as NewsStatus,
-      articles: null == articles
-          ? _value.articles
-          : articles // ignore: cast_nullable_to_non_nullable
-              as List<NewsArticle>,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      hasReachedMax: null == hasReachedMax
-          ? _value.hasReachedMax
-          : hasReachedMax // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      searchQuery: freezed == searchQuery
-          ? _value.searchQuery
-          : searchQuery // ignore: cast_nullable_to_non_nullable
-              as String?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult? Function(String message)? failure,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
   }
 }
 
-/// @nodoc
-abstract class _$$NewsStateImplCopyWith<$Res>
-    implements $NewsStateCopyWith<$Res> {
-  factory _$$NewsStateImplCopyWith(
-          _$NewsStateImpl value, $Res Function(_$NewsStateImpl) then) =
-      __$$NewsStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {NewsStatus status,
-      List<NewsArticle> articles,
-      int page,
-      bool hasReachedMax,
-      String? errorMessage,
-      DateTime? lastUpdated,
-      String? searchQuery,
-      String? category});
+abstract class _Initial implements NewsState {
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-class __$$NewsStateImplCopyWithImpl<$Res>
-    extends _$NewsStateCopyWithImpl<$Res, _$NewsStateImpl>
-    implements _$$NewsStateImplCopyWith<$Res> {
-  __$$NewsStateImplCopyWithImpl(
-      _$NewsStateImpl _value, $Res Function(_$NewsStateImpl) _then)
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$NewsStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements _Loading {
+  const _$LoadingImpl();
+
+  @override
+  String toString() {
+    return 'NewsState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<NewsArticle> articles,
+            int page,
+            bool hasReachedMax,
+            String? searchQuery,
+            String? category,
+            bool isLoadingMore)
+        loaded,
+    required TResult Function(String message) failure,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult? Function(String message)? failure,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements NewsState {
+  const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadedImplCopyWith<$Res> {
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<NewsArticle> articles,
+      int page,
+      bool hasReachedMax,
+      String? searchQuery,
+      String? category,
+      bool isLoadingMore});
+}
+
+/// @nodoc
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$NewsStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of NewsState
@@ -141,20 +383,14 @@ class __$$NewsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? articles = null,
     Object? page = null,
     Object? hasReachedMax = null,
-    Object? errorMessage = freezed,
-    Object? lastUpdated = freezed,
     Object? searchQuery = freezed,
     Object? category = freezed,
+    Object? isLoadingMore = null,
   }) {
-    return _then(_$NewsStateImpl(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as NewsStatus,
+    return _then(_$LoadedImpl(
       articles: null == articles
           ? _value._articles
           : articles // ignore: cast_nullable_to_non_nullable
@@ -167,14 +403,6 @@ class __$$NewsStateImplCopyWithImpl<$Res>
           ? _value.hasReachedMax
           : hasReachedMax // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       searchQuery: freezed == searchQuery
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -183,30 +411,28 @@ class __$$NewsStateImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String?,
+      isLoadingMore: null == isLoadingMore
+          ? _value.isLoadingMore
+          : isLoadingMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$NewsStateImpl implements _NewsState {
-  const _$NewsStateImpl(
-      {this.status = NewsStatus.initial,
-      final List<NewsArticle> articles = const <NewsArticle>[],
+class _$LoadedImpl implements _Loaded {
+  const _$LoadedImpl(
+      {required final List<NewsArticle> articles,
       this.page = 1,
       this.hasReachedMax = false,
-      this.errorMessage,
-      this.lastUpdated,
       this.searchQuery,
-      this.category})
+      this.category,
+      this.isLoadingMore = false})
       : _articles = articles;
 
-  @override
-  @JsonKey()
-  final NewsStatus status;
   final List<NewsArticle> _articles;
   @override
-  @JsonKey()
   List<NewsArticle> get articles {
     if (_articles is EqualUnmodifiableListView) return _articles;
     // ignore: implicit_dynamic_type
@@ -220,92 +446,324 @@ class _$NewsStateImpl implements _NewsState {
   @JsonKey()
   final bool hasReachedMax;
   @override
-  final String? errorMessage;
-  @override
-  final DateTime? lastUpdated;
-  @override
   final String? searchQuery;
   @override
   final String? category;
+  @override
+  @JsonKey()
+  final bool isLoadingMore;
 
   @override
   String toString() {
-    return 'NewsState(status: $status, articles: $articles, page: $page, hasReachedMax: $hasReachedMax, errorMessage: $errorMessage, lastUpdated: $lastUpdated, searchQuery: $searchQuery, category: $category)';
+    return 'NewsState.loaded(articles: $articles, page: $page, hasReachedMax: $hasReachedMax, searchQuery: $searchQuery, category: $category, isLoadingMore: $isLoadingMore)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NewsStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
+            other is _$LoadedImpl &&
             const DeepCollectionEquality().equals(other._articles, _articles) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasReachedMax, hasReachedMax) ||
                 other.hasReachedMax == hasReachedMax) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated) &&
             (identical(other.searchQuery, searchQuery) ||
                 other.searchQuery == searchQuery) &&
             (identical(other.category, category) ||
-                other.category == category));
+                other.category == category) &&
+            (identical(other.isLoadingMore, isLoadingMore) ||
+                other.isLoadingMore == isLoadingMore));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      status,
       const DeepCollectionEquality().hash(_articles),
       page,
       hasReachedMax,
-      errorMessage,
-      lastUpdated,
       searchQuery,
-      category);
+      category,
+      isLoadingMore);
 
   /// Create a copy of NewsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$NewsStateImplCopyWith<_$NewsStateImpl> get copyWith =>
-      __$$NewsStateImplCopyWithImpl<_$NewsStateImpl>(this, _$identity);
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<NewsArticle> articles,
+            int page,
+            bool hasReachedMax,
+            String? searchQuery,
+            String? category,
+            bool isLoadingMore)
+        loaded,
+    required TResult Function(String message) failure,
+  }) {
+    return loaded(
+        articles, page, hasReachedMax, searchQuery, category, isLoadingMore);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult? Function(String message)? failure,
+  }) {
+    return loaded?.call(
+        articles, page, hasReachedMax, searchQuery, category, isLoadingMore);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(
+          articles, page, hasReachedMax, searchQuery, category, isLoadingMore);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return loaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return loaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loaded != null) {
+      return loaded(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _NewsState implements NewsState {
-  const factory _NewsState(
-      {final NewsStatus status,
-      final List<NewsArticle> articles,
+abstract class _Loaded implements NewsState {
+  const factory _Loaded(
+      {required final List<NewsArticle> articles,
       final int page,
       final bool hasReachedMax,
-      final String? errorMessage,
-      final DateTime? lastUpdated,
       final String? searchQuery,
-      final String? category}) = _$NewsStateImpl;
+      final String? category,
+      final bool isLoadingMore}) = _$LoadedImpl;
 
-  @override
-  NewsStatus get status;
-  @override
   List<NewsArticle> get articles;
-  @override
   int get page;
-  @override
   bool get hasReachedMax;
-  @override
-  String? get errorMessage;
-  @override
-  DateTime? get lastUpdated;
-  @override
   String? get searchQuery;
-  @override
   String? get category;
+  bool get isLoadingMore;
 
   /// Create a copy of NewsState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NewsStateImplCopyWith<_$NewsStateImpl> get copyWith =>
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FailureImplCopyWith<$Res> {
+  factory _$$FailureImplCopyWith(
+          _$FailureImpl value, $Res Function(_$FailureImpl) then) =
+      __$$FailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$FailureImplCopyWithImpl<$Res>
+    extends _$NewsStateCopyWithImpl<$Res, _$FailureImpl>
+    implements _$$FailureImplCopyWith<$Res> {
+  __$$FailureImplCopyWithImpl(
+      _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$FailureImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FailureImpl implements _Failure {
+  const _$FailureImpl({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'NewsState.failure(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FailureImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      __$$FailureImplCopyWithImpl<_$FailureImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<NewsArticle> articles,
+            int page,
+            bool hasReachedMax,
+            String? searchQuery,
+            String? category,
+            bool isLoadingMore)
+        loaded,
+    required TResult Function(String message) failure,
+  }) {
+    return failure(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult? Function(String message)? failure,
+  }) {
+    return failure?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<NewsArticle> articles, int page, bool hasReachedMax,
+            String? searchQuery, String? category, bool isLoadingMore)?
+        loaded,
+    TResult Function(String message)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Failure implements NewsState {
+  const factory _Failure({required final String message}) = _$FailureImpl;
+
+  String get message;
+
+  /// Create a copy of NewsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

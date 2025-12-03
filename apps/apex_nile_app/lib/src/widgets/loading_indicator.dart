@@ -1,7 +1,8 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 /// A reusable centered loading indicator.
-/// 
+///
 /// This widget displays a consistent loading state throughout the app.
 class LoadingIndicator extends StatelessWidget {
   /// Creates a loading indicator.
@@ -22,10 +23,7 @@ class LoadingIndicator extends StatelessWidget {
           const CircularProgressIndicator(),
           if (message != null) ...[
             const SizedBox(height: 16),
-            Text(
-              message!,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            AppText.bodyMedium(message!),
           ],
         ],
       ),

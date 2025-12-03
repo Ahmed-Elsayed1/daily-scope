@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/auth_session_model.dart';
 
 /// Local data source for authentication using SQLite.
-/// 
+///
 /// Manages the users table and active session table for local-only authentication.
 class AuthLocalDataSource {
   /// Creates an auth local data source
@@ -12,7 +12,7 @@ class AuthLocalDataSource {
   final Database _database;
 
   /// Initializes the database tables for authentication.
-  /// 
+  ///
   /// Creates two tables:
   /// - `users`: stores registered user credentials
   /// - `auth_session`: stores the currently active session
@@ -40,7 +40,7 @@ class AuthLocalDataSource {
   }
 
   /// Registers a new user in the database.
-  /// 
+  ///
   /// Throws an exception if a user with the same email already exists.
   Future<void> registerUser({
     required String email,
@@ -71,7 +71,7 @@ class AuthLocalDataSource {
   }
 
   /// Finds a user by email and verifies the password.
-  /// 
+  ///
   /// Returns the user data if credentials are valid, null otherwise.
   Future<Map<String, dynamic>?> findUserByEmailAndPassword({
     required String email,
@@ -91,7 +91,7 @@ class AuthLocalDataSource {
   }
 
   /// Reads the current active session.
-  /// 
+  ///
   /// Returns null if no user is logged in.
   Future<AuthSessionModel?> readSession() async {
     final rows = await _database.query('auth_session', limit: 1);
@@ -105,7 +105,7 @@ class AuthLocalDataSource {
   Future<void> upsertSession(AuthSessionModel model) async {
     // Clear any existing session first
     await _database.delete('auth_session');
-    
+
     // Insert new session
     await _database.insert(
       'auth_session',

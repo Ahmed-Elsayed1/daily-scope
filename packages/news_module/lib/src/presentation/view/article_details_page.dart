@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -26,7 +27,7 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
   @override
   void initState() {
     super.initState();
-    
+
     final url = widget.article.url;
     if (url == null || url.isEmpty) {
       _hasError = true;
@@ -65,7 +66,7 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: AppText(
           widget.article.source,
           style: const TextStyle(fontSize: 16),
         ),
@@ -82,7 +83,7 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
           children: [
             Icon(Icons.error_outline, size: 48, color: Colors.red),
             SizedBox(height: 16),
-            Text('Cannot load article: Invalid URL'),
+            AppText('Cannot load article: Invalid URL'),
           ],
         ),
       );

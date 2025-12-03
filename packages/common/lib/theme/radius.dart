@@ -14,7 +14,8 @@ class AppRadius {
   static const BorderRadius large = BorderRadius.all(Radius.circular(16.0));
 
   /// Extra large radius - 24.0
-  static const BorderRadius extraLarge = BorderRadius.all(Radius.circular(24.0));
+  static const BorderRadius extraLarge =
+      BorderRadius.all(Radius.circular(24.0));
 
   /// Small circular radius value
   static const double smallValue = 8.0;

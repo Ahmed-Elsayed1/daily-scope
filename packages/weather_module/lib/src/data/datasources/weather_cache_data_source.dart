@@ -36,7 +36,7 @@ class WeatherCacheDataSource {
         PRIMARY KEY (lat, lon)
       )
     ''');
-    
+
     // Table for cached forecast
     await _database.execute('''
       CREATE TABLE IF NOT EXISTS cached_forecast (
@@ -89,7 +89,8 @@ class WeatherCacheDataSource {
   }
 
   /// Caches current weather for a location
-  Future<void> cacheWeather(double lat, double lon, WeatherModel weather) async {
+  Future<void> cacheWeather(
+      double lat, double lon, WeatherModel weather) async {
     await _database.insert(
       'cached_weather',
       {
@@ -116,9 +117,10 @@ class WeatherCacheDataSource {
     final data = jsonDecode(row['data'] as String) as Map<String, dynamic>;
     return WeatherModel.fromMap(data);
   }
-  
+
   /// Caches forecast for a location
-  Future<void> cacheForecast(double lat, double lon, List<WeatherModel> forecast) async {
+  Future<void> cacheForecast(
+      double lat, double lon, List<WeatherModel> forecast) async {
     final data = forecast.map((e) => e.toMap()).toList();
     await _database.insert(
       'cached_forecast',
@@ -144,7 +146,9 @@ class WeatherCacheDataSource {
 
     final row = rows.first;
     final list = jsonDecode(row['data'] as String) as List<dynamic>;
-    return list.map((e) => WeatherModel.fromMap(e as Map<String, dynamic>)).toList();
+    return list
+        .map((e) => WeatherModel.fromMap(e as Map<String, dynamic>))
+        .toList();
   }
 
   /// Caches weather snapshot
