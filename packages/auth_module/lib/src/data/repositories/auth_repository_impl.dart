@@ -8,7 +8,7 @@ import '../datasources/auth_local_data_source.dart';
 import '../models/auth_session_model.dart';
 
 /// Implementation of [AuthRepository] using local SQLite storage.
-/// 
+///
 /// Provides local-only authentication with password hashing using SHA-256.
 /// This is a simplified implementation for demonstration purposes.
 /// In a production app, you would integrate with a backend authentication service.
@@ -105,8 +105,8 @@ class AuthRepositoryImpl implements AuthRepository {
     final session = AuthSessionModel(
       userId: userData['email'] as String,
       email: userData['email'] as String,
-      displayName: userData['display_name'] as String? ?? 
-                   (userData['email'] as String).split('@').first,
+      displayName: userData['display_name'] as String? ??
+          (userData['email'] as String).split('@').first,
       hashedSecret: hashedPassword,
       createdAt: DateTime.now(),
     );

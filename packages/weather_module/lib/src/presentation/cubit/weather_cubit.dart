@@ -56,16 +56,16 @@ class WeatherCubit extends Cubit<WeatherState> {
     await fetchWeatherForLocation(city.lat, city.lon, city.name);
   }
 
-  Future<void> fetchWeatherForLocation(double lat, double lon, String? cityName) async {
+  Future<void> fetchWeatherForLocation(
+      double lat, double lon, String? cityName) async {
     emit(state.copyWith(status: WeatherStatus.loading, errorMessage: null));
     try {
       final weather = await _repository.getWeather(lat, lon);
       final forecast = await _repository.getForecast(lat, lon);
-      
+
       // If city name is provided, ensure it's in the weather object
-      final weatherWithCity = cityName != null 
-          ? weather.copyWith(cityName: cityName) 
-          : weather;
+      final weatherWithCity =
+          cityName != null ? weather.copyWith(cityName: cityName) : weather;
 
       emit(state.copyWith(
         status: WeatherStatus.success,
@@ -113,7 +113,7 @@ class WeatherCubit extends Cubit<WeatherState> {
       emit(state.copyWith(errorMessage: 'Failed to delete city'));
     }
   }
-  
+
   void clearSearch() {
     emit(state.copyWith(searchResults: []));
   }
@@ -127,7 +127,7 @@ class WeatherCubit extends Cubit<WeatherState> {
     // But we could expose a direct cache method if needed
     await fetchWeatherForLocation(lat, lon, null);
   }
-  
+
   Future<void> cacheSnapshot() async {
     // This might be intended to force a save of the current state
     // Since we cache on fetch, this might be a no-op or re-save

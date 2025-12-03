@@ -8,6 +8,7 @@ environment:
 # Dart workspace configuration
 workspace:
   - apps/apex_nile_app
+  - packages/common
   - packages/auth_module
   - packages/news_module
   - packages/weather_module

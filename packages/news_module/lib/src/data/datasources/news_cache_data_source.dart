@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/news_article_model.dart';
 
 /// Local data source for caching news articles using SQLite.
-/// 
+///
 /// Stores articles locally for offline access.
 class NewsCacheDataSource {
   /// Creates a news cache data source
@@ -33,18 +33,18 @@ class NewsCacheDataSource {
   Future<void> cacheArticles(List<NewsArticleModel> articles) async {
     final batch = _database.batch();
     final cachedAt = DateTime.now().toIso8601String();
-    
+
     for (final article in articles) {
       final map = article.toMap();
       map['cached_at'] = cachedAt;
-      
+
       batch.insert(
         'news_articles',
         map,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
-    
+
     await batch.commit(noResult: true);
   }
 
@@ -55,7 +55,7 @@ class NewsCacheDataSource {
       orderBy: 'published_at DESC',
       limit: 100, // Limit cache size
     );
-    
+
     return rows.map((row) => NewsArticleModel.fromMap(row)).toList();
   }
 
@@ -66,10 +66,9 @@ class NewsCacheDataSource {
 
   /// Clears old cached articles (older than specified days)
   Future<void> clearOldArticles({int daysToKeep = 7}) async {
-    final cutoffDate = DateTime.now()
-        .subtract(Duration(days: daysToKeep))
-        .toIso8601String();
-    
+    final cutoffDate =
+        DateTime.now().subtract(Duration(days: daysToKeep)).toIso8601String();
+
     await _database.delete(
       'news_articles',
       where: 'cached_at < ?',

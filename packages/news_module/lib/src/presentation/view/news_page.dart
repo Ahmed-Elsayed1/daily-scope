@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -64,7 +65,7 @@ class _NewsPageState extends State<NewsPage> {
       _selectedCategory = selected ? category : null;
       _searchController.clear();
     });
-    
+
     if (selected) {
       context.read<NewsCubit>().filterByCategory(category);
     } else {
@@ -75,7 +76,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Top headlines')),
+      appBar: AppBar(title: const AppText('Top headlines')),
       body: Column(
         children: [
           // Search Bar
@@ -117,7 +118,7 @@ class _NewsPageState extends State<NewsPage> {
                 final category = _categories[index];
                 final isSelected = _selectedCategory == category;
                 return ChoiceChip(
-                  label: Text(
+                  label: AppText(
                     category[0].toUpperCase() + category.substring(1),
                     style: TextStyle(
                       color: isSelected ? Colors.white : Colors.black87,
@@ -138,82 +139,81 @@ class _NewsPageState extends State<NewsPage> {
           Expanded(
             child: BlocBuilder<NewsCubit, NewsState>(
               builder: (context, state) {
-                if (state.status == NewsStatus.loading &&
-                    state.articles.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state.status == NewsStatus.failure &&
-                    state.articles.isEmpty) {
-                  return Center(
+                return state.map(
+                  initial: (_) => const SizedBox.shrink(),
+                  loading: (_) =>
+                      const Center(child: CircularProgressIndicator()),
+                  failure: (failure) => Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(Icons.error_outline,
                             size: 48, color: Colors.red),
                         const SizedBox(height: 16),
-                        Text(state.errorMessage ?? 'Unable to load headlines.'),
+                        AppText(failure.message),
                         const SizedBox(height: 16),
-                        ElevatedButton(
+                        AppButton.primary(
+                          label: 'Retry',
                           onPressed: () => context.read<NewsCubit>().refresh(),
-                          child: const Text('Retry'),
                         ),
                       ],
                     ),
-                  );
-                }
-                
-                if (state.status == NewsStatus.success && state.articles.isEmpty) {
-                   return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.search_off,
-                            size: 48, color: Colors.grey),
-                        const SizedBox(height: 16),
-                        const Text('No articles found.'),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                             _searchController.clear();
-                             setState(() => _selectedCategory = null);
-                             context.read<NewsCubit>().clearFilters();
-                          },
-                          child: const Text('Clear Filters'),
+                  ),
+                  loaded: (loaded) {
+                    if (loaded.articles.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.search_off,
+                                size: 48, color: Colors.grey),
+                            const SizedBox(height: 16),
+                            const AppText('No articles found.'),
+                            const SizedBox(height: 16),
+                            AppButton.secondary(
+                              label: 'Clear Filters',
+                              onPressed: () {
+                                _searchController.clear();
+                                setState(() => _selectedCategory = null);
+                                context.read<NewsCubit>().clearFilters();
+                              },
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }
+                      );
+                    }
 
-                return RefreshIndicator(
-                  onRefresh: () => context.read<NewsCubit>().refresh(),
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    itemCount: state.articles.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == state.articles.length) {
-                        if (state.hasReachedMax) {
-                          return const SizedBox(height: 80);
-                        }
-                        return const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                      final article = state.articles[index];
-                      return NewsArticleCard(
-                        article: article,
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            '/news/details',
-                            arguments: article,
+                    return RefreshIndicator(
+                      onRefresh: () => context.read<NewsCubit>().refresh(),
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        itemCount: loaded.articles.length + 1,
+                        itemBuilder: (context, index) {
+                          if (index == loaded.articles.length) {
+                            if (loaded.hasReachedMax) {
+                              return const SizedBox(height: 80);
+                            }
+                            return const Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }
+                          final article = loaded.articles[index];
+                          return NewsArticleCard(
+                            article: article,
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                '/news/details',
+                                arguments: article,
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 );
               },
             ),

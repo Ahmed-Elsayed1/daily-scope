@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_module/news_module.dart';
 import 'package:weather_module/weather_module.dart';
 
+import 'package:common/common.dart';
+
 import 'src/core/di/app_dependencies.dart';
 import 'src/core/router/app_router.dart';
 import 'src/core/services/connectivity_service.dart';
-import 'src/design_system/theme.dart';
 
 class ApexNileApp extends StatelessWidget {
   const ApexNileApp({super.key});
@@ -36,6 +37,7 @@ class ApexNileApp extends StatelessWidget {
               create: (_) => dependencies.createWeatherCubit()),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Apex Nile',
           theme: buildApexTheme(),
           darkTheme: buildApexDarkTheme(),

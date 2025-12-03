@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Reusable text field widget for authentication forms.
-/// 
+///
 /// Supports text input with optional password obscuring, icons, and validation.
 class AuthTextField extends StatefulWidget {
   /// Creates an auth text field
@@ -18,22 +18,22 @@ class AuthTextField extends StatefulWidget {
 
   /// Text editing controller
   final TextEditingController controller;
-  
+
   /// Label text for the field
   final String label;
-  
+
   /// Whether this is a password field (shows/hides text)
   final bool isPassword;
-  
+
   /// Keyboard type for input
   final TextInputType? keyboardType;
-  
+
   /// Optional prefix icon
   final IconData? prefixIcon;
-  
+
   /// Optional custom validator
   final String? Function(String?)? validator;
-  
+
   /// Whether the field is enabled
   final bool enabled;
 
@@ -56,13 +56,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
       controller: widget.controller,
       decoration: InputDecoration(
         labelText: widget.label,
-        prefixIcon: widget.prefixIcon != null 
-            ? Icon(widget.prefixIcon) 
-            : null,
+        prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(
-                  _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                  _obscureText
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
                 ),
                 onPressed: () {
                   setState(() {
@@ -75,8 +75,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
       obscureText: widget.isPassword && _obscureText,
       keyboardType: widget.keyboardType,
       enabled: widget.enabled,
-      validator: widget.validator ?? 
-        (value) => value == null || value.isEmpty ? 'This field is required' : null,
+      validator: widget.validator ??
+          (value) =>
+              value == null || value.isEmpty ? 'This field is required' : null,
     );
   }
 }

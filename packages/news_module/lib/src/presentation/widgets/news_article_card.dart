@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -34,13 +35,13 @@ class NewsArticleCard extends StatelessWidget {
                 ),
               )
             : const Icon(Icons.image_outlined),
-        title: Text(article.title),
+        title: AppText(article.title),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('${article.source} • $publishedLabel'),
-            Text(
+            AppText('${article.source} • $publishedLabel'),
+            AppText(
               summary,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,

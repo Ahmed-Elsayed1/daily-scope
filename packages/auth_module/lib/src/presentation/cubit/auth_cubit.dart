@@ -9,7 +9,7 @@ import '../../domain/usecases/logout.dart';
 part 'auth_cubit.freezed.dart';
 
 /// Cubit for managing authentication state.
-/// 
+///
 /// Handles user authentication operations including login, registration,
 /// logout, and session restoration. Uses [AuthRepository] for data operations.
 class AuthCubit extends Cubit<AuthState> {
@@ -18,16 +18,16 @@ class AuthCubit extends Cubit<AuthState> {
     required this.repository,
     required this.loginUseCase,
     required this.logoutUseCase,
-  }) : super(const AuthState()) {
+  }) : super(const AuthState.initial()) {
     _hydrate();
   }
 
   /// The authentication repository
   final AuthRepository repository;
-  
+
   /// Use case for login
   final LoginWithEmailPasswordUseCase loginUseCase;
-  
+
   /// Use case for logout
   final LogoutUseCase logoutUseCase;
 
@@ -35,39 +35,37 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> _hydrate() async {
     final user = await repository.currentUser();
     if (user == null) {
-      emit(state.copyWith(status: AuthStatus.unauthenticated, user: null));
+      emit(const AuthState.unauthenticated());
     } else {
-      emit(state.copyWith(status: AuthStatus.authenticated, user: user));
+      emit(AuthState.authenticated(user: user));
     }
   }
 
   /// Registers a new user with email and password
   Future<void> register(String email, String password) async {
-    emit(state.copyWith(status: AuthStatus.authenticating, errorMessage: null));
+    emit(const AuthState.authenticating());
     try {
       final user = await repository.registerWithEmailPassword(
         email: email,
         password: password,
       );
-      emit(state.copyWith(status: AuthStatus.authenticated, user: user));
+      emit(AuthState.authenticated(user: user));
     } catch (error) {
-      emit(state.copyWith(
-        status: AuthStatus.failure,
-        errorMessage: error.toString().replaceAll('Exception: ', ''),
+      emit(AuthState.failure(
+        message: error.toString().replaceAll('Exception: ', ''),
       ));
     }
   }
 
   /// Logs in a user with email and password
   Future<void> login(String email, String password) async {
-    emit(state.copyWith(status: AuthStatus.authenticating, errorMessage: null));
+    emit(const AuthState.authenticating());
     try {
       final user = await loginUseCase(email: email, password: password);
-      emit(state.copyWith(status: AuthStatus.authenticated, user: user));
+      emit(AuthState.authenticated(user: user));
     } catch (error) {
-      emit(state.copyWith(
-        status: AuthStatus.failure,
-        errorMessage: error.toString().replaceAll('Exception: ', ''),
+      emit(AuthState.failure(
+        message: error.toString().replaceAll('Exception: ', ''),
       ));
     }
   }
@@ -75,16 +73,17 @@ class AuthCubit extends Cubit<AuthState> {
   /// Logs out the current user
   Future<void> logout() async {
     await logoutUseCase();
-    emit(state.copyWith(status: AuthStatus.unauthenticated, user: null));
+    emit(const AuthState.unauthenticated());
   }
 }
 
-/// State for authentication
+/// State for authentication using Freezed union types
 @freezed
 class AuthState with _$AuthState {
-  const factory AuthState({
-    @Default(AuthStatus.unknown) AuthStatus status,
-    AuthUser? user,
-    String? errorMessage,
-  }) = _AuthState;
+  const factory AuthState.initial() = _Initial;
+  const factory AuthState.authenticating() = _Authenticating;
+  const factory AuthState.authenticated({required AuthUser user}) =
+      _Authenticated;
+  const factory AuthState.unauthenticated() = _Unauthenticated;
+  const factory AuthState.failure({required String message}) = _Failure;
 }

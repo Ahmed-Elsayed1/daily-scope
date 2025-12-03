@@ -47,7 +47,8 @@ class NewsRepositoryImpl implements NewsRepository {
     required String category,
     required int page,
   }) async {
-    final models = await apiService.fetchByCategory(category: category, page: page);
+    final models =
+        await apiService.fetchByCategory(category: category, page: page);
     await cacheDataSource.cacheArticles(models);
     return models.map((model) => model.toEntity()).toList();
   }

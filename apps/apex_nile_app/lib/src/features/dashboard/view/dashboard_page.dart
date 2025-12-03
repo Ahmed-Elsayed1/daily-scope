@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_module/news_module.dart';
 import 'package:weather_module/weather_module.dart';
 
+import 'package:common/common.dart';
+
 import '../../../core/router/app_router.dart';
-import '../../../design_system/spacing.dart';
-import '../../../design_system/typography.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -33,7 +33,7 @@ class _GreetingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Welcome to Apex Nile', style: AppTextStyles.headlineMedium);
+    return AppText('Welcome to Apex Nile', style: AppTextStyles.headlineMedium);
   }
 }
 
@@ -44,36 +44,47 @@ class _AuthSessionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        final subtitle = switch (state.status) {
-          AuthStatus.authenticated =>
-            'Signed in as ${state.user?.displayName ?? state.user?.email}',
-          AuthStatus.authenticating => 'Signing you in... hold tight',
-          AuthStatus.failure => state.errorMessage ?? 'Authentication error',
-          _ => 'Please sign in to unlock personalization',
-        };
+        final subtitle = state.when(
+          initial: () => 'Initializing...',
+          authenticating: () => 'Signing you in... hold tight',
+          authenticated: (user) {
+            final displayName = user.displayName.trim();
+            final label = displayName.isNotEmpty ? displayName : user.email;
+            return 'Signed in as $label';
+          },
+          unauthenticated: () => 'Please sign in to unlock personalization',
+          failure: (message) => message,
+        );
+
+        final isAuthenticated = state.maybeWhen(
+          authenticated: (_) => true,
+          orElse: () => false,
+        );
+
         return Card(
           child: Padding(
             padding: AppSpacing.allLg,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Account', style: AppTextStyles.titleLarge),
+                AppText('Account', style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
-                Text(subtitle, style: AppTextStyles.bodyMedium),
-                if (state.status != AuthStatus.authenticated)
+                AppText(subtitle, style: AppTextStyles.bodyMedium),
+                if (!isAuthenticated)
                   Padding(
                     padding: const EdgeInsets.only(top: AppSpacing.md),
-                    child: FilledButton(
-                      onPressed: () => Navigator.of(context).pushNamed(AppRouter.auth),
-                      child: const Text('Go to login'),
+                    child: AppButton.primary(
+                      label: 'Go to login',
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed(AppRouter.auth),
                     ),
                   )
                 else
                   Padding(
                     padding: const EdgeInsets.only(top: AppSpacing.md),
-                    child: OutlinedButton(
+                    child: AppButton.secondary(
+                      label: 'Logout',
                       onPressed: context.read<AuthCubit>().logout,
-                      child: const Text('Logout'),
                     ),
                   ),
               ],
@@ -96,42 +107,47 @@ class _NewsPreview extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Top stories', style: AppTextStyles.titleLarge),
+            AppText('Top stories', style: AppTextStyles.titleLarge),
             const SizedBox(height: AppSpacing.md),
             BlocBuilder<NewsCubit, NewsState>(
               builder: (context, state) {
-                if (state.status == NewsStatus.loading &&
-                    state.articles.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state.articles.isEmpty) {
-                  return const Text(
-                      'No cached stories yet. Pull to refresh on the News tab.');
-                }
-                final preview = state.articles.take(3).toList();
-                return Column(
-                  children: [
-                    for (final article in preview)
-                      ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(article.title, maxLines: 2, overflow: TextOverflow.ellipsis),
-                        subtitle: Text(article.source),
-                        onTap: () {
-                           Navigator.of(context).pushNamed(
-                            AppRouter.articleDetails,
-                            arguments: article,
-                          );
-                        },
-                      ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () =>
-                            Navigator.of(context).pushNamed(AppRouter.news),
-                        child: const Text('View all'),
-                      ),
-                    ),
-                  ],
+                return state.maybeMap(
+                  loading: (_) =>
+                      const Center(child: CircularProgressIndicator()),
+                  loaded: (loadedState) {
+                    if (loadedState.articles.isEmpty) {
+                      return const AppText(
+                          'No cached stories yet. Pull to refresh on the News tab.');
+                    }
+                    final preview = loadedState.articles.take(3).toList();
+                    return Column(
+                      children: [
+                        for (final article in preview)
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: AppText(article.title,
+                                maxLines: 2, overflow: TextOverflow.ellipsis),
+                            subtitle: AppText(article.source),
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                AppRouter.articleDetails,
+                                arguments: article,
+                              );
+                            },
+                          ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: AppButton.tertiary(
+                            label: 'View all',
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(AppRouter.news),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  orElse: () => const AppText(
+                      'No cached stories yet. Pull to refresh on the News tab.'),
                 );
               },
             ),
@@ -155,7 +171,7 @@ class _WeatherPreview extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Weather', style: AppTextStyles.titleLarge),
+                AppText('Weather', style: AppTextStyles.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
                 if (state.status == WeatherStatus.loading)
                   const Padding(
@@ -163,7 +179,7 @@ class _WeatherPreview extends StatelessWidget {
                     child: Center(child: CircularProgressIndicator()),
                   )
                 else if (state.currentWeather == null)
-                  const Text(
+                  const AppText(
                       'No weather data yet. Tap the Weather tab to search for a city.')
                 else ...[
                   Row(
@@ -172,11 +188,11 @@ class _WeatherPreview extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          AppText(
                             state.currentWeather!.cityName ?? 'Unknown',
                             style: AppTextStyles.titleMedium,
                           ),
-                          Text(
+                          AppText(
                             '${state.currentWeather!.temperature.round()}°C',
                             style: AppTextStyles.headlineLarge,
                           ),
@@ -185,8 +201,9 @@ class _WeatherPreview extends StatelessWidget {
                       Column(
                         children: [
                           // Icon placeholder
-                          const Icon(Icons.wb_sunny, size: 48, color: Colors.orange),
-                          Text(state.currentWeather!.description),
+                          const Icon(Icons.wb_sunny,
+                              size: 48, color: Colors.orange),
+                          AppText(state.currentWeather!.description),
                         ],
                       ),
                     ],
@@ -194,10 +211,10 @@ class _WeatherPreview extends StatelessWidget {
                   const SizedBox(height: AppSpacing.md),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(
+                    child: AppButton.tertiary(
+                      label: 'Open weather',
                       onPressed: () =>
                           Navigator.of(context).pushNamed(AppRouter.weather),
-                      child: const Text('Open weather'),
                     ),
                   ),
                 ],

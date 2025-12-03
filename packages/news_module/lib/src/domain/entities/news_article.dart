@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'news_article.freezed.dart';
 
 /// Domain entity representing a news article.
-/// 
+///
 /// Contains all information about a news article from the API.
 @freezed
 class NewsArticle with _$NewsArticle {

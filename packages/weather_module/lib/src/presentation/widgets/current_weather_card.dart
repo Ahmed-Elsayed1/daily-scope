@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/weather.dart';
@@ -10,19 +11,19 @@ class CurrentWeatherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Card(
       margin: const EdgeInsets.all(16),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            Text(
+            AppText(
               weather.cityName ?? 'Unknown Location',
               style: theme.textTheme.headlineMedium,
             ),
             const SizedBox(height: 8),
-            Text(
+            AppText(
               '${weather.temperature.round()}°C',
               style: theme.textTheme.displayLarge?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -30,7 +31,7 @@ class CurrentWeatherCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            AppText(
               weather.description.toUpperCase(),
               style: theme.textTheme.titleMedium?.copyWith(
                 color: theme.textTheme.bodySmall?.color,
@@ -77,11 +78,11 @@ class CurrentWeatherCard extends StatelessWidget {
       children: [
         Icon(icon, color: Theme.of(context).colorScheme.secondary),
         const SizedBox(height: 4),
-        Text(
+        AppText(
           value,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        Text(
+        AppText(
           label,
           style: Theme.of(context).textTheme.bodySmall,
         ),

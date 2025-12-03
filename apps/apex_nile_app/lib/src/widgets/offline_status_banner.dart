@@ -1,12 +1,11 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/services/connectivity_service.dart';
-import '../design_system/colors.dart';
-import '../design_system/spacing.dart';
 
 /// Widget that displays a banner at the top of the screen when the app is offline.
-/// 
+///
 /// Automatically shows and hides based on connectivity status from [ConnectivityService].
 class OfflineStatusBanner extends StatelessWidget {
   const OfflineStatusBanner({super.key});
@@ -33,21 +32,20 @@ class OfflineStatusBanner extends StatelessWidget {
             bottom: false,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Icon(
                   Icons.cloud_off,
                   color: Colors.white,
                   size: 16,
                 ),
-                SizedBox(width: AppSpacing.sm),
-                Text(
+                const SizedBox(width: AppSpacing.sm),
+                AppText.bodySmall(
                   'You are offline. Showing cached content.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
-                    fontSize: 13,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ],
             ),

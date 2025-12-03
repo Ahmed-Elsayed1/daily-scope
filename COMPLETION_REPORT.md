@@ -119,7 +119,7 @@
 ### 1. Deprecation Warnings (Low Priority)
 - **Issue**: Some Flutter API deprecations
 - **Files**:
-  - `apps/apex_nile_app/lib/src/design_system/theme.dart` - `background` deprecated
+- `packages/common/lib/theme/theme.dart` - `background` deprecated
   - `apps/apex_nile_app/lib/src/widgets/app_shell.dart` - `withOpacity` deprecated
 - **Impact**: Low - code works but should be updated for future Flutter versions
 - **Fix**: Replace `background` with `surface`, use `withValues()` instead of `withOpacity()`

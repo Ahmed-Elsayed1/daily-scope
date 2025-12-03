@@ -1,10 +1,8 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-import '../design_system/spacing.dart';
-import '../design_system/typography.dart';
-
 /// A reusable empty state view widget that displays a message when no content is available.
-/// 
+///
 /// This widget is used throughout the app to show empty states consistently.
 class EmptyStateView extends StatelessWidget {
   /// Creates an empty state view.
@@ -31,7 +29,7 @@ class EmptyStateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Center(
       child: Padding(
         padding: AppSpacing.allLg,
@@ -41,10 +39,10 @@ class EmptyStateView extends StatelessWidget {
             Icon(
               icon,
               size: 96,
-              color: theme.colorScheme.primary.withOpacity(0.3),
+              color: theme.colorScheme.primary.withValues(alpha: 0.3),
             ),
             const SizedBox(height: AppSpacing.lg),
-            Text(
+            AppText(
               message,
               style: AppTextStyles.titleMedium.copyWith(
                 color: theme.textTheme.bodySmall?.color,
@@ -53,9 +51,9 @@ class EmptyStateView extends StatelessWidget {
             ),
             if (actionLabel != null && onAction != null) ...[
               const SizedBox(height: AppSpacing.lg),
-              OutlinedButton(
+              AppButton.secondary(
+                label: actionLabel!,
                 onPressed: onAction,
-                child: Text(actionLabel!),
               ),
             ],
           ],
