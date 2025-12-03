@@ -122,20 +122,11 @@ flutter run
 The project uses [Melos](https://melos.invertase.dev/) for monorepo management:
 
 ```bash
-# Bootstrap all packages
-melos bootstrap
+# Get all packages
+melos get
 
 # Run code generation (Freezed, JSON serialization)
-melos run generate
-
-# Analyze all packages
-melos run analyze
-
-# Format all code
-melos run format
-
-# Clean all packages
-melos run clean
+melos generate
 ```
 
 ---
@@ -154,51 +145,6 @@ melos run clean
 | Routing/Nav | ✅ Complete | 100% |
 | Dashboard | ✅ Complete | 100% |
 | Offline Support | ✅ Complete | 100% |
-
----
-
-## 📋 Next Steps (TODO)
-
-### High Priority
-
-1. **News Module**
-   - [ ] Create `ArticleDetailsPage` with WebView
-   - [ ] Add search TextField to `NewsPage`
-   - [ ] Add category filter chips to `NewsPage`
-   - [ ] Implement pull-to-refresh in `NewsPage`
-   - [ ] Add scroll listener for infinite pagination
-
-2. **Weather Module**
-   - [ ] Implement `WeatherApiService` (Current, One Call, Geocoding APIs)
-   - [ ] Implement `WeatherCacheDataSource` with SQLite
-   - [ ] Create `WeatherDetailsPage` (hourly + 7-day forecast)
-   - [ ] Create `CitySearchPage` for managing cities
-   - [ ] Update `WeatherCubit` for multiple cities
-
-3. **Navigation & Routing**
-   - [ ] Add all routes to `AppRouter`
-   - [ ] Implement route guards for authentication
-   - [ ] Add page transition animations
-
-4. **Dashboard**
-   - [ ] Combine weather overview + news headlines
-   - [ ] Add pull-to-refresh for both sections
-   - [ ] Wire up navigation to detail pages
-
-### Medium Priority
-
-- [ ] Better error messages throughout
-- [ ] Skeleton loaders for lists
-- [ ] Custom empty state messages
-- [ ] Retry logic with exponential backoff
-- [ ] Weather and category icons
-
-### Low Priority
-
-- [ ] Hero animations  
-- [ ] Localization support
-- [ ] Analytics/event tracking
-- [ ] Unit and widget tests
 
 ---
 
@@ -263,7 +209,7 @@ json_annotation: ^4.8.1
 ```bash
 # Clean and regenerate
 melos clean
-melos bootstrap
+melos get
 melos run generate
 ```
 
