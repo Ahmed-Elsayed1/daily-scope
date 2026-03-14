@@ -65,9 +65,6 @@ Each feature module follows **clean architecture**:
 
 ---
 
-## 📱 Screenshots
-
-
 
 ## 🚀 Getting Started
 
