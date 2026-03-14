@@ -44,10 +44,11 @@ class _ProfileView extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: AppSpacing.allLg,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Avatar
               CircleAvatar(
