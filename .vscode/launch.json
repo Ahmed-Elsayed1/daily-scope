@@ -5,8 +5,8 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "apex_nile",
-            "cwd": "apps\\apex_nile_app",
+            "name": "daily_scope",
+            "cwd": "daily_scope",
             "request": "launch",
             "type": "dart",
             // "program": "lib/main.dart",
@@ -18,26 +18,26 @@
             // ]
         },
         // {
-        //     "name": "apex_nile",
+        //     "name": "daily_scope",
         //     "request": "launch",
         //     "type": "dart"
         // },
         // {
-        //     "name": "apex_nile_app",
-        //     "cwd": "apps\\apex_nile_app",
+        //     "name": "daily_scope",
+        //     "cwd": "daily_scope",
         //     "request": "launch",
         //     "type": "dart"
         // },
         // {
-        //     "name": "apex_nile_app (profile mode)",
-        //     "cwd": "apps\\apex_nile_app",
+        //     "name": "daily_scope (profile mode)",
+        //     "cwd": "daily_scope",
         //     "request": "launch",
         //     "type": "dart",
         //     "flutterMode": "profile"
         // },
         // {
-        //     "name": "apex_nile_app (release mode)",
-        //     "cwd": "apps\\apex_nile_app",
+        //     "name": "daily_scope (release mode)",
+        //     "cwd": "daily_scope",
         //     "request": "launch",
         //     "type": "dart",
         //     "flutterMode": "release"

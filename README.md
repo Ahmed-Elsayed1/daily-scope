@@ -1,8 +1,8 @@
-# Apex Nile
+# Daily Scope
 
 **A Flutter monorepo application featuring authentication, news, and weather with offline support.**
 
-Apex Nile is a production-ready Flutter app demonstrating clean architecture, proper state management, and offline-first design across multiple feature modules.
+Daily Scope is a production-ready Flutter app demonstrating clean architecture, proper state management, and offline-first design across multiple feature modules.
 
 ---
 
@@ -11,9 +11,9 @@ Apex Nile is a production-ready Flutter app demonstrating clean architecture, pr
 This project uses **Dart workspaces** for monorepo management with three feature modules:
 
 ```
-apex_nile/
-├── apps/
-│   └── apex_nile_app/          # Main Flutter app (shell)
+daily_scope/
+├── 
+│   └── daily_scope/          # Main Flutter app (shell)
 └── packages/
     ├── auth_module/            # Authentication feature
     ├── news_module/            # News feature  
@@ -79,8 +79,8 @@ Each feature module follows **clean architecture**:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/apex_nile.git
-   cd apex_nile
+   git clone https://github.com/yourusername/daily_scope.git
+   cd daily_scope
    ```
 
 2. **Install dependencies**
@@ -101,7 +101,7 @@ Each feature module follows **clean architecture**:
 
 **With API keys** (recommended):
 ```bash
-cd apps/apex_nile_app
+cd daily_scope
 flutter run \
   --dart-define=NEWS_API_KEY=your_newsapi_key_here \
   --dart-define=OPENWEATHER_API_KEY=your_openweather_key_here
@@ -109,7 +109,7 @@ flutter run \
 
 **Without API keys** (limited functionality):
 ```bash
-cd apps/apex_nile_app
+cd daily_scope
 flutter run
 ```
 
@@ -216,7 +216,7 @@ melos run generate
 ### Build errors
 ```bash
 # Clean Flutter build cache
-cd apps/apex_nile_app
+cd daily_scope
 flutter clean
 flutter pub get
 ```
