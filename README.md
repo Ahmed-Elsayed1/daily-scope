@@ -6,6 +6,10 @@ Daily Scope is a production-ready Flutter app demonstrating clean architecture, 
 
 ---
 
+## 📎 Links
+- [APK Download](https://drive.google.com/file/d/1vWFtoMESLRZlS3DtCtlqZ9KQX16eECF1/view?usp=drive_link)
+- [LinkedIn](https://linkedin.com/in/ahmed-elsayed-36880821a)
+
 ## 🏗️ Architecture
 
 This project uses **Dart workspaces** for monorepo management with three feature modules:
