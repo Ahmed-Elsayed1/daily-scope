@@ -76,7 +76,14 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const AppText('Top headlines')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const AppText(
+          'Top headlines',
+          style: AppTextStyles.headlineMedium,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
       body: Column(
         children: [
           // Search Bar

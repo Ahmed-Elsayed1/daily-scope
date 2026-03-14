@@ -1,7 +1,7 @@
 name: melos_workspace_config
 
 packages:
-    - ./apps/**
+    - ./**
     - ./packages/**
 
 command:

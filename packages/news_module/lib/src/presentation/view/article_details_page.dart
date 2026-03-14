@@ -68,7 +68,8 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
       appBar: AppBar(
         title: AppText(
           widget.article.source,
-          style: const TextStyle(fontSize: 16),
+          style: AppTextStyles.headlineMedium,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
       body: _buildBody(),

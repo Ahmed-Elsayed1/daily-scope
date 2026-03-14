@@ -5,9 +5,9 @@ import 'radius.dart';
 import 'spacing.dart';
 import 'typography.dart';
 
-/// Builds the light theme for the Apex Nile app.
+/// Builds the light theme for the Daily Scope app.
 /// Uses design system tokens for consistent styling.
-ThemeData buildApexTheme() {
+ThemeData buildDailyTheme() {
   final base = ThemeData.light();
 
   return base.copyWith(
@@ -162,9 +162,9 @@ ThemeData buildApexTheme() {
   );
 }
 
-/// Builds the dark theme for the Apex Nile app.
+/// Builds the dark theme for the Daily Scope app.
 /// Uses design system tokens for consistent styling.
-ThemeData buildApexDarkTheme() {
+ThemeData buildDailyDarkTheme() {
   final base = ThemeData.dark();
 
   return base.copyWith(

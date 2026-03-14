@@ -1,5 +1,5 @@
-name: apex_nile_workspace
-description: Apex Nile Flutter monorepo workspace
+name: daily_scope_workspace
+description: Daily Scope Flutter monorepo workspace
 publish_to: "none"
 
 environment:
@@ -7,7 +7,7 @@ environment:
 
 # Dart workspace configuration
 workspace:
-  - apps/apex_nile_app
+  - daily_scope
   - packages/common
   - packages/auth_module
   - packages/news_module

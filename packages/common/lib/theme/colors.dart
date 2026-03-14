@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Color palette for the Apex Nile app.
+/// Color palette for the Daily Scope app.
 /// Provides both light and dark theme colors with semantic naming.
 class AppColors {
   AppColors._();

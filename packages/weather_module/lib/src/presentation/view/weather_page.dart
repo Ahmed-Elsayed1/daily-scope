@@ -15,7 +15,11 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AppText('Weather'),
+        title: const AppText(
+          'Weather',
+          style: AppTextStyles.headlineMedium,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),

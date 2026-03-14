@@ -1,6 +1,6 @@
 name: auth_module
 publish_to: "none"
-description: Authentication feature module for Apex Nile.
+description: Authentication feature module for Daily Scope.
 version: 0.1.0
 
 resolution: workspace
